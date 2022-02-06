@@ -1,6 +1,7 @@
 #preprocess bathymetry data
-#1. extract mask from coastline.geojson 
-#2. load it into the database
+#1. Clip raster from the 3 mile nautical boundary 
+#2. Burn coastline boundary from raster 
+#3. Load final raster into the database
 
 from osgeo import gdal, ogr
 
