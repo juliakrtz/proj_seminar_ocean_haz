@@ -1,3 +1,4 @@
+#import weather data, will change by coordinate
 import requests
 
 url = "https://api.stormglass.io/v2/weather/point"
