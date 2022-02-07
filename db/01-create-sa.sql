@@ -34,4 +34,9 @@ CREATE TABLE shark_attacks (
     water_clarity integer, 
     shark "string"
 ); 
-    
+
+CREATE TABLE hazardous_areas (
+    id serial PRIMARY KEY,
+    pixel_depth integer, 
+    hazardous_y_n "string"
+);
