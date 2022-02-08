@@ -1,7 +1,7 @@
 from .logs import die
 import sqlalchemy as sql
 import pandas as pd
-
+from sqlalchemy import create_engine
 
 class DBController:
     def __init__(self, host: str, port: str, database: str, username: str, password: str):
@@ -39,14 +39,21 @@ class DBController:
         """
         try:
             engine = sql.create_engine(self.uri)
-            with engine.connect() as con:
-                tran = con.begin()
-                df.to_sql(
-                    name=table, schema=schema,
-                    con=con, if_exists="append", index=False,
-                    chunksize=chunksize, method="multi"
-                )
-                tran.commit()
+            df.to_sql(
+                con=engine,
+                table= TABLE, 
+                schema = SCHEMA
+            )
+        # try:
+        #     engine = sql.create_engine(self.uri)
+        #     with engine.connect() as con:
+        #         tran = con.begin()
+        #         df.to_sql(
+        #             name=table, schema=schema,
+        #             con=con, if_exists="append", index=False,
+        #             chunksize=chunksize, method="multi"
+        #         )
+        #         tran.commit()
         except Exception as e:
             tran.rollback()
             die(f"{e}")
