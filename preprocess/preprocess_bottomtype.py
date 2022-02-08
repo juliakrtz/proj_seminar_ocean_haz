@@ -1,14 +1,17 @@
 #importing bottom type API
-import requests
+import geopandas
+
+#import requests
 
 DB_SCHEMA = "sa"
 TABLE = "bottom_type"
 DOWNLOAD_DIR = "data/original"
 PROCESSED_DIR = "data/processed"
 
-url = "https://geodata.hawaii.gov/arcgis/rest/services/CoastalMarine/MapServer/2/query?where=1%3D1&outFields=*&outSR=4326&f=json"
-
 url_bottom_type = "https://opendata.arcgis.com/datasets/4780150a51064c37bc627e2dcc4df615_2.geojson"
+
+gdf_bottom_type = geopandas.read_file(url_bottom_type)
+
 
 
 

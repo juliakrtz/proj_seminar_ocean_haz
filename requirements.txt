@@ -1,2 +1,5 @@
 gdal==3.4.1
 geopandas
+geocoder
+sqlalchemy
+geojson

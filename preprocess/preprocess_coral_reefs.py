@@ -1,9 +1,14 @@
 #import coral reef API
-import requests
+import geopandas
 
-url = "https://geodata.hawaii.gov/arcgis/rest/services/CoastalMarine/MapServer/7/query?where=1%3D1&outFields=*&outSR=4326&f=jsonwhere=1%3D1&outFields=*&outSR=4326&f=json"
+DB_SCHEMA = "sa"
+TABLE = "bottom_type"
+DOWNLOAD_DIR = "data/original"
+PROCESSED_DIR = "data/processed"
 
 url_coral_reef = "https://opendata.arcgis.com/datasets/9229d814438349948c99b5e61a084418_7.geojson"
+
+gdf = geopandas.read_file(url_coral_reef)
 
 
 payload={}

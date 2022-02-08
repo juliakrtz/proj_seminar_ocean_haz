@@ -1,0 +1,6 @@
+database:
+  database: gps_project
+  host: localhost
+  port: 5432
+  username: postgres
+  password: postgres
