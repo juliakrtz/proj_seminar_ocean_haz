@@ -1,4 +1,4 @@
-#import coral reef API
+#preprocess bathymetry data
 import geopandas
 
 DB_SCHEMA = "sa"

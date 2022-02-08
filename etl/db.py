@@ -12,21 +12,21 @@ class DBController:
         self.password = password
         self.uri = f"postgres+psycopg2://{username}:{password}@{host}:{port}/{database}"
 
-    def select_data(self, query: str) -> pd.DataFrame:
-        """This functions abstracts the `SELECT` queries
+    # def select_data(self, query: str) -> pd.DataFrame:
+        # """This functions abstracts the `SELECT` queries
 
-        Args:
-            query (str): the select query to be executed
+        # Args:
+        #     query (str): the select query to be executed
 
-        Returns:
-            pd.DataFrame: the selection
-        """
-        try:
-            con = sql.create_engine(self.uri)
-            df = pd.read_sql(query, con)
-        except Exception as e:
-            die(f"select_data: {e}")
-        return df
+        # Returns:
+        #     pd.DataFrame: the selection 
+        # """
+        # try:
+        #     con = sql.create_engine(self.uri)
+        #     df = pd.read_sql(query, con)
+        # except Exception as e:
+        #     die(f"select_data: {e}")
+        # return df
 
     def insert_data(self, df: pd.DataFrame, schema: str, table: str, chunksize: int=100) -> None:
         """This function abstracts the `INSERT` queries
