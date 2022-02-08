@@ -14,7 +14,7 @@ def download_data(url: str, fname: str) -> None:
         e.die(f"{e}")
 
 
-def read_csv(
+def 'read_csv'(
     fname: str,
     sep: str = ",",
 ) -> pd.DataFrame:
