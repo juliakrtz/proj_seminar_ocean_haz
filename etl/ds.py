@@ -29,7 +29,7 @@ def read_csv(
         pd.DataFrame: [description]
     """
     try:
-        df = pd.read_csv(fname, sep=sep)
+        df = pd.read_csv(fname, encoding= "cp1252", sep=sep)
     except Exception as e:
         die(f"read_csv: {e}")
     return df
