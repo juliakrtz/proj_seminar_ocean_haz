@@ -1,8 +1,8 @@
-#preprocess bathymetry data
+#import
 import geopandas
 
 DB_SCHEMA = "sa"
-TABLE = "bottom_type"
+TABLE = "coral_reefs"
 DOWNLOAD_DIR = "data/original"
 PROCESSED_DIR = "data/processed"
 
@@ -19,3 +19,6 @@ headers = {
 response = requests.request("GET", url, headers=headers, data=payload)
 
 print(response.text)
+
+
+
