@@ -24,8 +24,8 @@ df['locations'] = df['island'].apply(geocoding)
 df[['lon','lat']] = pd.DataFrame(df['locations'].tolist(), 
         index = df.index)
 
-db = e.DBController(**config["database"])
-db.insert_data(df, DB_SCHEMA, TABLE, chunksize=1000)
+#db = e.DBController(**config["database"])
+e.DBController.insert_data(df, DB_SCHEMA, TABLE, chunksize=1000)
 
 #df.head()
 

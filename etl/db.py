@@ -9,7 +9,7 @@ class DBController:
         self.port = port
         self.database = database
         self.username = username
-        self.password = password
+        self.password = password 
         self.uri = f"postgres+psycopg2://{username}:{password}@{host}:{port}/{database}"
 
     # def select_data(self, query: str) -> pd.DataFrame:
@@ -41,8 +41,9 @@ class DBController:
             engine = sql.create_engine(self.uri)
             df.to_sql(
                 con=engine,
-                table= TABLE, 
-                schema = SCHEMA
+                name = table, 
+                schema = schema,
+                chunksize=chunksize, method="multi"
             )
         # try:
         #     engine = sql.create_engine(self.uri)
