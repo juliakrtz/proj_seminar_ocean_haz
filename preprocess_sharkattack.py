@@ -24,8 +24,17 @@ df['locations'] = df['island'].apply(geocoding)
 df[['lon','lat']] = pd.DataFrame(df['locations'].tolist(), 
         index = df.index)
 
+df.to_csv(
+    "data\processed\shark_attacks_geo.csv",
+            sep= ",",
+            quotechar = ",",        
+            header=True,
+            index=False,
+            index_label=False
+)
+
 #db = e.DBController(**config["database"])
-e.DBController.insert_data(df, DB_SCHEMA, TABLE, chunksize=1000)
+e.DBController.insert_data(df=df, schema = DB_SCHEMA, table=TABLE, chunksize=1000)
 
 #df.head()
 
