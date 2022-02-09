@@ -2,7 +2,10 @@ from .logs import die
 import sqlalchemy as sql
 import pandas as pd
 from sqlalchemy import create_engine
-
+host= 'localhost'
+port: 5432
+username: postgres
+password: postgres
 class DBController:
     def __init__(self, host: str, port: str, database: str, username: str, password: str):
         self.host = host
@@ -42,7 +45,8 @@ class DBController:
             df.to_sql(
                 con=engine,
                 name= table, 
-                schema = schema
+                schema = schema,
+                chunksize = chunksize 
             )
         # try:
         #     engine = sql.create_engine(self.uri)
