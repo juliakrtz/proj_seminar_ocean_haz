@@ -41,8 +41,8 @@ class DBController:
             engine = sql.create_engine(self.uri)
             df.to_sql(
                 con=engine,
-                table= TABLE, 
-                schema = SCHEMA
+                name= table, 
+                schema = schema
             )
         # try:
         #     engine = sql.create_engine(self.uri)

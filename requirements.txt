@@ -3,3 +3,4 @@ geopandas
 geocoder
 sqlalchemy
 geojson
+PyYAML
