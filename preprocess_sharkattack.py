@@ -47,7 +47,7 @@ def write_csv(df, output_csv):
     )
 
 #insert the data into the database
-def insert_data(df: pd.DataFrame, schema: str, table: str, chunksize: int=100) -> None:
+def insert_data(gdf: geopandas.GeoDataFrame, table: str, chunksize: int=100) -> None:
     """This function inserts the data into the database
 
     Args:
@@ -56,20 +56,19 @@ def insert_data(df: pd.DataFrame, schema: str, table: str, chunksize: int=100) -
         table (str): the name of the table
         chunksize (int): the number of rows to insert at the time
     """
-    try: #where information is sent to the database 
-        engine = sql.create_engine('postgresql://postgres:postgres@localhost:5432/geotech_ocean_haz')
-        with engine.connect() as con:
-            tran = con.begin()
-            df.to_sql(
-                name=table, schema=schema,
-                con=con, if_exists="append", index=False,
-                chunksize=chunksize, method="multi"
+    engine = sql.create_engine('postgresql://postgres:postgres@localhost:5432/geotech_ocean_haz')
+        # with engine.connect() as con:
+        #     tran = con.begin()
+    gdf.to_postgis(
+                name=table, #schema=schema,
+                con=engine, if_exists="append", index=False,
+                chunksize=chunksize #, method="multi"
             )
-            tran.commit()
-    except Exception as e:
-        if 'tran' in locals():
-            tran.rollback()
-        (f"{e}")
+    #         tran.commit()
+    # except Exception as e:
+    #     if 'tran' in locals():
+    #         tran.rollback()
+    #     (f"{e}")
 
 # #run the geocoding to the dataframe
 # df = geocode(df)
@@ -89,7 +88,7 @@ gdf = geopandas.GeoDataFrame(
 
 #insert the shark attacks to the database
 #db = e.DBController(**config["database"])
-insert_data(df=gdf, schema = DB_SCHEMA, table=TABLE, chunksize=1000)
+insert_data(gdf=gdf, table=TABLE, chunksize=1000)
 
 
  
