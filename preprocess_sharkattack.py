@@ -19,20 +19,22 @@ shark_attacks = "data\original\shark_attacks.csv"
 shark_attacks_geo = "data\processed\shark_attacks_geo.csv"
 
 #convert csv file to dataframe
-df = pd.read_csv(shark_attacks, encoding = 'cp1252', sep=",", header="infer")
+df = pd.read_csv(shark_attacks, encoding = 'cp1252', sep=";", header="infer")
+df.insert(5, 'full_location', (df.Location + "," + df.Location_attack), allow_duplicates=False)
+
 
 #geocoding function 
 def geocoding(input_island):
-    g = geocoder.osm(input_island)
+    g = geocoder.osm(input_island, country_codes= 'us')
     return g.osm['x'], g.osm['y']
 
 #geocode the location of shark attacks
 def geocode(df: pd.DataFrame):
-    ##apply function to dataframe in island column 
-    df['locations'] = df['island'].apply(geocoding)
-    df[['lon','lat']] = pd.DataFrame(df['locations'].tolist(), 
+    ##apply function to dataframe in full_location column
+        df['locations'] = df['Location'].apply(geocoding)
+        df[['lon','lat']] = pd.DataFrame(df['locations'].tolist(), 
             index = df.index)
-    return df
+        return df
 
 #convert the geocoded shark attacks to csv and save it
 def write_csv(df, output_csv):
@@ -86,7 +88,8 @@ gdf = geopandas.GeoDataFrame(
     crs= {'init': 'EPSG:4326'},
     geometry= geopandas.points_from_xy(df_geocoded.lon, df_geocoded.lat)
 )
-print(gdf)
+#print(gdf)
+
 #insert the shark attacks to the database
 #db = e.DBController(**config["database"])
 insert_data(gdf=gdf, table=TABLE, chunksize=1000)
