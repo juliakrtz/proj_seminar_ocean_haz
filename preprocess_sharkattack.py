@@ -2,10 +2,11 @@
 import pandas as pd
 import geopandas
 import geocoder 
-import etl as e
+# import etl as e
 import csv
 import sqlalchemy as sql 
 from sqlalchemy import create_engine 
+from shapely.geometry import Point
 
 
 DB_SCHEMA = "sa"
@@ -21,32 +22,33 @@ shark_attacks_geo = "data\processed\shark_attacks_geo.csv"
 df = pd.read_csv(shark_attacks, encoding = 'cp1252', sep=",", header="infer")
 
 #geocoding function 
-# def geocoding(input_island):
-#     g = geocoder.osm(input_island)
-#     return g.osm['x'], g.osm['y']
+def geocoding(input_island):
+    g = geocoder.osm(input_island)
+    return g.osm['x'], g.osm['y']
 
-# #geocode the location of shark attacks
-# def geocode(df: pd.DataFrame):
-#     ##apply function to dataframe in island column 
-#     df['locations'] = df['island'].apply(geocoding)
-#     df[['lon','lat']] = pd.DataFrame(df['locations'].tolist(), 
-#             index = df.index)
-#     return df
+#geocode the location of shark attacks
+def geocode(df: pd.DataFrame):
+    ##apply function to dataframe in island column 
+    df['locations'] = df['island'].apply(geocoding)
+    df[['lon','lat']] = pd.DataFrame(df['locations'].tolist(), 
+            index = df.index)
+    return df
 
-#convert the dataframe with the coordinates to csv and save it
-def write_csv(df):
+#convert the geocoded shark attacks to csv and save it
+def write_csv(df, output_csv):
     df.to_csv(
-        shark_attacks_geo,
+        output_csv,
         sep= ";",
-        quotechar = "'",        
+        quotechar = '"',        
         header=True,
         index=False,
         index_label=False,
         quoting=csv.QUOTE_NONNUMERIC, 
     )
 
+#insert the data into the database
 def insert_data(df: pd.DataFrame, schema: str, table: str, chunksize: int=100) -> None:
-    """This function abstracts the `INSERT` queries
+    """This function inserts the data into the database
 
     Args:
         df (pd.DataFrame): dataframe to be inserted
@@ -69,13 +71,21 @@ def insert_data(df: pd.DataFrame, schema: str, table: str, chunksize: int=100) -
             tran.rollback()
         (f"{e}")
 
-#df = geocode(df)
-#write_csv(df) 
+# #run the geocoding to the dataframe
+# df = geocode(df)
 
+# #get the geocoded dataframe and store it as csv
+# #this path was made in order to store the geocoded file and avoid running the geocoding everytime
+# write_csv(df, shark_attacks_geo) 
 
-#convert the shark attacks with coordinates to geodataframe
-gdf = pd.read_csv(shark_attacks_geo, sep=";", header="infer")
+#convert the geocoded shark attacks in csv to dataframe again
+df_geocoded = pd.read_csv(shark_attacks_geo, sep=";", header="infer")
 
+#convert dataframe to geodataframe
+gdf = geopandas.GeoDataFrame(
+    crs= {'init': 'EPSG:4326'},
+    geometry= geopandas.points_from_xy(df_geocoded.lon, df_geocoded.lat)
+)
 
 #insert the shark attacks to the database
 #db = e.DBController(**config["database"])
