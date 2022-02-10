@@ -1,4 +1,4 @@
-#importing bottom type API
+#pre processing bottom type shapefile and loading it to db
 import geopandas
 from sqlalchemy import create_engine
 
