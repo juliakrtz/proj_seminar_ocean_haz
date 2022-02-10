@@ -61,7 +61,7 @@ def insert_data(gdf: geopandas.GeoDataFrame, table: str, chunksize: int=100) -> 
         #     tran = con.begin()
     gdf.to_postgis(
                 name=table, #schema=schema,
-                con=engine, if_exists="append", index=False,
+                con=engine,
                 chunksize=chunksize #, method="multi"
             )
     #         tran.commit()
@@ -82,10 +82,11 @@ df_geocoded = pd.read_csv(shark_attacks_geo, sep=";", header="infer")
 
 #convert dataframe to geodataframe
 gdf = geopandas.GeoDataFrame(
+    df_geocoded,
     crs= {'init': 'EPSG:4326'},
     geometry= geopandas.points_from_xy(df_geocoded.lon, df_geocoded.lat)
 )
-
+print(gdf)
 #insert the shark attacks to the database
 #db = e.DBController(**config["database"])
 insert_data(gdf=gdf, table=TABLE, chunksize=1000)
