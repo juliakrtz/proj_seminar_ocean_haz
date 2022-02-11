@@ -15,23 +15,25 @@ class sharkattacks(db.Model):
     __tablename__ = "shark_attacks"
     __table_args__ = {"schema": "public"}
     id = db.Columb(db.Integer, primary_key = True)
-    date_attack = db.Column(db.timestamp()), 
-    time_attack = db.Column(db.timestamp()),
-    island = db.Column(db.varchar()),
+    date = db.Column(db.timestamp()), 
+    time = db.Column(db.timestamp()),
+    location = db.Column(db.varchar()),
     location_attack = db.Column(db.varchar()),
-    location_attack_2 = db.Column(db.varchar()),
-    dist_from_shore = db.Column(db.varchar()),
+    location_attack2 = db.Column(db.varchar()),
+    full_location = db.Column(db.varchar()),
+    location_attack3 = db.Column(db.varchar()),
     activity = db.Column(db.varchar()),
     water_clarity = db.Column(db.integer()),
-    ocean_depth = db.Column(db.integer()), 
-    shark_type = db.Column(db.varchar()),
+    water_depth = db.Column(db.integer()),
+    description =  db.Column(db.varchar()),
+    shark = db.Column(db.varchar())
+    lon = db.Column(db.Float()), 
+    lat = db.Column(db.Float())
 ); 
 
 @app.route('/')
 def index():
-    return render_template('') #put html here 
-
-
+	return render_template('index.html')
 
 
 if __name__ == '__main__':
