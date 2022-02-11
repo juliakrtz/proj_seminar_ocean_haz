@@ -2,6 +2,9 @@
 import geopandas
 import pandas
 from sqlalchemy import create_engine
+import pyproj 
+
+pyproj.datadir.set_data_dir('C:\\Users\\johnk\\anaconda3\\envs\\ocean_haz\\Library\\share\\proj')  
 
 DB_SCHEMA = "sa"
 TABLE = "coral_reefs"
