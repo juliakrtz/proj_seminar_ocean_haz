@@ -8,6 +8,7 @@ from geojson import Point as Geoj_pt, Polygon as Geoj_polygon, Feature, Featurec
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:5432/geotech_ocean_haz'
 
+#use the application object as a parameter to create an object of class SQLAlchemy
 db = SQLAlchemy(app)
 
 #create the columns, matches table from postgis
@@ -46,3 +47,7 @@ if __name__ == '__main__':
     # passenger_count = db.Column(db.Integer)
     # geojson = db.Column(db.Text)
 
+
+
+    def __init__(self, date_attack, time_attack, island, location_attack, location_attack_2, dist_from_shore, activity, water_clarity, ocean_depth, shark_type):
+        self.date_attack = date_attack
