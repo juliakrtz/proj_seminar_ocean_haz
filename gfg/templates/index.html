@@ -59,14 +59,12 @@
     </script>
 
     <div id = form>
-        <form>
-            <h5>Enter coordinates</h5>
-            <div>
-                <input type="text" name="coordinates" placeholder="coordinates">
-            </div>
-            <div>
-                <button >Submit</button>
-            </div>
+        <form action="{{ url_for("gfg")}}" method="post">
+            <label for="longitude">Longitude (x):</label>
+            <input type="text" id="longitude" name="lon" placeholder="longitude">
+            <label for="latitude">Latitude (y):</label>
+            <input type="text" id="latitude" name="lat" placeholder="latitude">
+            <button type="submit">Submit</button>
         </form>
     </div>
     
