@@ -1,20 +1,16 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template
+import sqlite3
 
-#create Flask application
+app = Flask(__name__)
 
-db = SQLAlchemy(app)
+@app.route('/')
+def index():
+    conn= get_db_connection()
+    posts = conn.execute('SELECT * FROM coral_reefs').fetchall()
+    conn.close() 
+    return render_template('index.html', posts = posts)
 
-def create_app():
-    app = Flask(__name__)
-    db.init_app(app)
-    return app 
-
-from ocean_haz import create_app
-
-
-
-
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:5432/geotech_ocean_haz'
-
-# db = SQLAlchemy(app)
+def get_db_connection():
+    conn = sqllite3.connect('geotech_ocean_haz.db')
+    conn.row_factory = sqlite3.Row
+    return conn 
