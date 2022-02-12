@@ -11,7 +11,6 @@ import geopandas as gpd
 
 #create Flask application
 app = Flask(__name__)
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:5432/geotech_ocean_haz'
 
 # A decorator used to tell the application
 # which URL is associated function
@@ -45,7 +44,10 @@ def index():
 connection = psycopg2.connect(database="geotech_ocean_haz", user="postgres", password = "postgres")
 cursor = connection.cursor()
 
-cursor.execute("SELECT objectid, acres, featureuid, geometry FROM coral_reefs as c WHERE st_intersects(c.geometry, st_transform (st_buffer(st_transform(st_setsrid(st_makepoint(-156.076333, 20.815275),4326),26904),20000),4326))")
+cursor.execute(f"""SELECT objectid, acres, featureuid, geometry 
+                  FROM coral_reefs as c 
+                  WHERE st_intersects(c.geometry, st_transform (st_buffer(st_transform(st_setsrid(st_makepoint({x},{y}),4326),26904),20000),4326))"""
+)
 connection.commit() 
 
 rows_list=[]
