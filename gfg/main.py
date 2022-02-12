@@ -1,4 +1,10 @@
 from flask import Flask, render_template, jsonify, request, redirect #importing Flask and other modules
+import sqlite3
+import psycopg2 
+import osgeo.ogr
+import shapely
+import shapely.wkt 
+import geopandas as gpd 
 #from  shapely.geometry import Point as Shapely_pt, mapping
 #from geojson import Point as Geoj_pt, Polygon as Geoj_polygon, Feature, Featurecollection
 
@@ -24,6 +30,32 @@ def gfg():
 if __name__=='__main__':
    app.run()
 
+
+def get_db_connection():
+    conn = sqllite3.connect('geotech_ocean_haz.db')
+    conn.row_factory = sqlite3.Row
+    return conn 
+
+@app.route('/')
+def index():
+    conn= get_db_connection()
+    posts = conn.execute('SELECT * FROM coral_reefs').fetchall()
+    conn.close() 
+    return render_template('index.html', posts = posts)
+
+connection = psycopg2.connect(database="geotech_ocean_haz", user="postgres", password = "postgres")
+cursor = connection.cursor()
+
+cursor.execute("SELECT objectid, acres, featureuid, geometry FROM coral_reefs as c WHERE st_intersects(c.geometry, st_transform (st_buffer(st_transform(st_setsrid(st_makepoint(-156.076333, 20.815275),4326),26904),20000),4326))")
+connection.commit() 
+
+rows_list=[]
+for objectid,acres,featureuid, geometry in cursor:
+    data= {'OBJECTID':objectid, 'ACRES':acres, 'FEATUREUID':featureuid, 'GEOMETRY':geometry}
+    rows_list.append(data)
+#gdf=gpd.GeoDataFrame(rows_list, crs='epsg:4326').set_index('OBJECTID')
+#gdf.head()
+print(rows_list)
 
 
 # #create the columns, matches table from postgis
