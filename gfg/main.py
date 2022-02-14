@@ -22,24 +22,24 @@ def gfg():
        # getting input with latitude (y) = lat from the HTML form 
        y = request.form.get("lat") 
        print(x,y)
-       return redirect('/')
-    return render_template("index.html")
+       sharks_list = get_sharks(x,y)
+    return render_template("index.html",markers=sharks_list )
   
 if __name__=='__main__':
    app.run()
 
 
-def get_db_connection():
-    conn = sqllite3.connect('geotech_ocean_haz.db')
-    conn.row_factory = sqlite3.Row
-    return conn 
+# def get_db_connection():
+#     conn = sqllite3.connect('geotech_ocean_haz.db')
+#     conn.row_factory = sqlite3.Row
+#     return conn 
 
-@app.route('/')
-def index():
-    conn= get_db_connection()
-    posts = conn.execute('SELECT * FROM coral_reefs').fetchall()
-    conn.close() 
-    return render_template('index.html', posts = posts)
+# @app.route('/')
+# def index():
+#     conn= get_db_connection()
+#     posts = conn.execute('SELECT * FROM coral_reefs').fetchall()
+#     conn.close() 
+#     return render_template('index.html', posts = posts)
 
 connection = psycopg2.connect(database="geotech_ocean_haz", user="postgres", password = "postgres")
 cursor = connection.cursor()
@@ -57,34 +57,3 @@ for objectid,acres,featureuid, geometry in cursor:
 #gdf=gpd.GeoDataFrame(rows_list, crs='epsg:4326').set_index('OBJECTID')
 #gdf.head()
 print(rows_list)
-
-
-# #create the columns, matches table from postgis
-# class sharkattacks(db.Model):
-#     __tablename__ = "shark_attacks"
-#     __table_args__ = {"schema": "public"}
-#     id = db.Columb(db.Integer, primary_key = True)
-#     date = db.Column(db.timestamp()), 
-#     time = db.Column(db.timestamp()),
-#     location = db.Column(db.varchar()),
-#     location_attack = db.Column(db.varchar()),
-#     location_attack2 = db.Column(db.varchar()),
-#     full_location = db.Column(db.varchar()),
-#     location_attack3 = db.Column(db.varchar()),
-#     activity = db.Column(db.varchar()),
-#     water_clarity = db.Column(db.integer()),
-#     water_depth = db.Column(db.integer()),
-#     description =  db.Column(db.varchar()),
-#     shark = db.Column(db.varchar())
-#     lon = db.Column(db.Float()), 
-#     lat = db.Column(db.Float())
-# ); 
-
-# @app.route('/')
-# def index():
-# 	return render_template('index.html')
-
-
-# if __name__ == '__main__':
-#     app.run(debug=TRUE) 
-
