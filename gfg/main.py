@@ -83,20 +83,20 @@ if __name__=='__main__':
    app.run()
 
 
-#testing code 
-@app.route('/')
-#convert coral reefs data from postgis to dictionary
-data_coral_reefs = gpd.read_postgis("postgresql://postgres:postgres@localhost:5432/geotech_ocean_haz/coral_reefs")
-data_dict = data_coral_reefs.to_dict()
+# #testing code 
+# @app.route('/')
+# #convert coral reefs data from postgis to dictionary
+# data_coral_reefs = gpd.read_postgis("postgresql://postgres:postgres@localhost:5432/geotech_ocean_haz/coral_reefs")
+# data_dict = data_coral_reefs.to_dict()
 
-#convert dictionary to geojson
-coral_reefsjsonFeature = json.dumps(data_dict)
+# #convert dictionary to geojson
+# coral_reefsjsonFeature = json.dumps(data_dict)
 
-#add geojson to the map
-L.geoJSON(coral_reefsjsonFeature).addTo(map)
+# #add geojson to the map
+# L.geoJSON(coral_reefsjsonFeature).addTo(map)
 
-#send variable to html using flask
-return render_template("index.html", coral_reefsjsonFeature = json.dumps(data_dict))
+# #send variable to html using flask
+# return render_template("index.html", coral_reefsjsonFeature = json.dumps(data_dict))
 
 
 
