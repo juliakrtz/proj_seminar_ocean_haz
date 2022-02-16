@@ -51,14 +51,14 @@
     <script type="text/javascript">
 
         //styles bottom type
-        // var geojsonMarkerOptions = {
-        // radius: 8,
-        // fillColor: "#ff7800",
-        // color: "#000",
-        // weight: 1,
-        // opacity: 1,
-        // fillOpacity: 0.8
-        // };
+        var geojsonMarkerOptions = {
+        radius: 8,
+        fillColor: "#ff7800",
+        color: "#000",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+        };
 
         //create the leaflet.js map, centered in hawaii
         var map = L.map('map').setView([20.749255, -156.767903], 7);
@@ -70,6 +70,8 @@
                 return L.circleMarker(latlng, geojsonMarkerOptions);
             }
         }).addTo(map);
+
+        {{bottom_type|safe}}
 
 
     </script>
