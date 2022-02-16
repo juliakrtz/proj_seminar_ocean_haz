@@ -65,13 +65,15 @@
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
+
+        {% for bottom_type in bottom_type %}
         L.geoJSON({{bottom_type}}, {
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, geojsonMarkerOptions);
             }
         }).addTo(map);
 
-        {{bottom_type|safe}}
+        {% endfor %}
 
 
     </script>
