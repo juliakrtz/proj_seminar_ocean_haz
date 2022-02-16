@@ -65,11 +65,7 @@ def gfg():
        # getting input with longitude (x) = lon from the HTML form
        x = request.form.get("lon")
        # getting input with latitude (y) = lat from the HTML form 
-       y = request.form.get("lat") 
-       #print(x,y)
-       sharks_list = get_shark_attacks(x,y)
-    return render_template("index.html",markers=sharks_list)
-  
+       y = request.form.get("lat")  
        print(x,y)
 
        connection = get_db_connection()
