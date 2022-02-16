@@ -9,7 +9,7 @@ DB_SCHEMA = "sa"
 TABLE = "hazard_areas"
 
 
-url_hazard_areas = "hi_hazard_areas.shp"
+url_hazard_areas = "original\hi_hazard_areas.shp"
 
 gdf = geopandas.read_file(url_hazard_areas)
 

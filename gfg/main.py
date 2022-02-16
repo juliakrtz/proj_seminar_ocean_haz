@@ -5,6 +5,8 @@ import osgeo.ogr
 import shapely
 import shapely.wkt 
 import geopandas as gpd 
+import pandas as pd
+import json 
 #from  shapely.geometry import Point as Shapely_pt, mapping
 #from geojson import Point as Geoj_pt, Polygon as Geoj_polygon, Feature, Featurecollection
 
@@ -21,12 +23,32 @@ def gfg():
        x = request.form.get("lon")
        # getting input with latitude (y) = lat from the HTML form 
        y = request.form.get("lat") 
-       print(x,y)
-       sharks_list = get_sharks(x,y)
-    return render_template("index.html",markers=sharks_list )
+       #print(x,y)
+       sharks_list = get_shark_attacks(x,y)
+    return render_template("index.html",markers=sharks_list)
   
 if __name__=='__main__':
    app.run()
+
+
+#testing code 
+@app.route('/')
+#convert coral reefs data from postgis to dictionary
+data_coral_reefs = gpd.read_postgis("postgresql://postgres:postgres@localhost:5432/geotech_ocean_haz/coral_reefs")
+data_dict = data_coral_reefs.to_dict()
+
+#convert dictionary to geojson
+coral_reefsjsonFeature = json.dumps(data_dict)
+
+#add geojson to the map
+L.geoJSON(coral_reefsjsonFeature).addTo(map)
+
+#send variable to html using flask
+return render_template("index.html", coral_reefsjsonFeature = json.dumps(data_dict))
+
+
+
+
 
 
 # def get_db_connection():
