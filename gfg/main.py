@@ -48,6 +48,120 @@ def get_bottom_type(x,y,connection):
 
    return  bottom_feature_collection
 
+#get shark attacks geojson from inputted coordinates
+def get_shark_attacks(x,y,connection):
+   #query that gives a Feature Collection object
+   query_shark_attacks = f'''SELECT jsonb_build_object(
+      'type',     'FeatureCollection',
+      'features', jsonb_agg(features.feature)
+   )
+   FROM (
+   SELECT jsonb_build_object(
+      'type',       'Feature',
+      'id',          id,
+      'geometry',   ST_AsGeoJSON(geometry)::jsonb,
+      'properties', to_jsonb(inputs) - 'id' - 'geometry'
+   ) AS feature
+   FROM (SELECT 
+      s.Date, s.Time, s.Location, s.Location_attack, s.Location_attack2, s.full_location, s.Location_attack3, s.Activity, s.Shark, s.geometry, s.id
+      FROM shark_attacks as s
+      WHERE st_intersects(s.geometry, 
+                  st_transform(
+                     st_buffer(
+                        st_transform(
+                           st_setsrid(
+                              st_makepoint({x}, {y}),4326),26904),10000),4326)
+                  )
+   ) inputs) features'''
+
+   #Reads the query and store it in a dataframe
+   feature_collection_shark_attacks = pd.read_sql(query_shark_attacks, connection)
+
+   #Getting geojson dictionary by calling iloc[0] on the jsonb_build_object column
+   feature_collection_dict_shark_attacks = feature_collection_shark_attacks.iloc[0]['jsonb_build_object']
+
+   #Converting to geojson
+   shark_feature_collection = json.dumps(feature_collection_dict_shark_attacks)
+   print(shark_feature_collection)
+
+   return  shark_feature_collection
+
+#get coral reefs geojson from inputted coordinates
+def get_coral_reefs(x,y,connection):
+   #query that gives a Feature Collection object
+   query_coral_reefs = f'''SELECT jsonb_build_object(
+      'type',     'FeatureCollection',
+      'features', jsonb_agg(features.feature)
+   )
+   FROM (
+   SELECT jsonb_build_object(
+      'type',       'Feature',
+      'id',         objectid,
+      'geometry',   ST_AsGeoJSON(geometry)::jsonb,
+      'properties', to_jsonb(inputs) - 'objectid' - 'geometry'
+   ) AS feature
+   FROM (SELECT 
+      c.objectid, c.acres, c.geometry
+      FROM coral_reefs as c
+      WHERE st_intersects(c.geometry, 
+                  st_transform(
+                     st_buffer(
+                        st_transform(
+                           st_setsrid(
+                              st_makepoint({x}, {y}),4326),26904),10000),4326)
+                  )
+   ) inputs) features'''
+
+   #Reads the query and store it in a dataframe
+   feature_collection_coral_reefs = pd.read_sql(query_coral_reefs, connection)
+
+   #Getting geojson dictionary by calling iloc[0] on the jsonb_build_object column
+   feature_collection_dict_coral_reefs = feature_collection_coral_reefs.iloc[0]['jsonb_build_object']
+
+   #Converting to geojson
+   coral_feature_collection = json.dumps(feature_collection_dict_coral_reefs)
+   print(coral_feature_collection)
+
+   return  coral_feature_collection
+
+#get hazard areas geojson from inputted coordinates
+def get_hazard_areas(x,y,connection):
+   #query that gives a Feature Collection object
+   query_hazard_areas = f'''SELECT jsonb_build_object(
+      'type',     'FeatureCollection',
+      'features', jsonb_agg(features.feature)
+   )
+   FROM (
+   SELECT jsonb_build_object(
+      'type',       'Feature',
+      'id',         id,
+      'geometry',   ST_AsGeoJSON(geometry)::jsonb,
+      'properties', to_jsonb(inputs) - 'id' - 'geometry'
+   ) AS feature
+   FROM (SELECT 
+      h.id, h.gridcode, h.geometry
+      FROM hazard_areas as h
+      WHERE st_intersects(h.geometry, 
+                  st_transform(
+                     st_buffer(
+                        st_transform(
+                           st_setsrid(
+                              st_makepoint({x}, {y}),4326),26904),10000),4326)
+                  )
+   ) inputs) features'''
+
+   #Reads the query and store it in a dataframe
+   feature_collection_hazard_areas = pd.read_sql(query_hazard_areas, connection)
+
+   #Getting geojson dictionary by calling iloc[0] on the jsonb_build_object column
+   feature_collection_dict_hazard_areas = feature_collection_hazard_areas.iloc[0]['jsonb_build_object']
+
+   #Converting to geojson
+   hazard_feature_collection = json.dumps(feature_collection_dict_hazard_areaas)
+   print(hazard_feature_collection)
+
+   return  hazard_feature_collection
+
 #get connection to the Postgres database
 def get_db_connection():
    connection = psycopg2.connect(database="geotech_ocean_haz", user="postgres", password = "postgres")
@@ -73,7 +187,7 @@ def gfg():
 
        bottom_type = get_bottom_type(x,y,connection)
        #render the result form with data
-       return render_template("results.html", bottom_type = bottom_type )
+       return render_template("results.html", bottom_type = bottom_type)
    else:
       #render the input page
       return render_template("input.html")
@@ -83,20 +197,20 @@ if __name__=='__main__':
    app.run()
 
 
-#testing code 
-@app.route('/')
-#convert coral reefs data from postgis to dictionary
-data_coral_reefs = gpd.read_postgis("postgresql://postgres:postgres@localhost:5432/geotech_ocean_haz/coral_reefs")
-data_dict = data_coral_reefs.to_dict()
+# #testing code 
+# @app.route('/')
+# #convert coral reefs data from postgis to dictionary
+# data_coral_reefs = gpd.read_postgis("postgresql://postgres:postgres@localhost:5432/geotech_ocean_haz/coral_reefs")
+# data_dict = data_coral_reefs.to_dict()
 
-#convert dictionary to geojson
-coral_reefsjsonFeature = json.dumps(data_dict)
+# #convert dictionary to geojson
+# coral_reefsjsonFeature = json.dumps(data_dict)
 
-#add geojson to the map
-L.geoJSON(coral_reefsjsonFeature).addTo(map)
+# #add geojson to the map
+# L.geoJSON(coral_reefsjsonFeature).addTo(map)
 
-#send variable to html using flask
-return render_template("index.html", coral_reefsjsonFeature = json.dumps(data_dict))
+# #send variable to html using flask
+# return render_template("index.html", coral_reefsjsonFeature = json.dumps(data_dict))
 
 
 
