@@ -63,7 +63,7 @@ def get_shark_attacks(x,y,connection):
       'properties', to_jsonb(inputs) - 'id' - 'geometry'
    ) AS feature
    FROM (SELECT 
-      s.Date, s.Time, s.Location, s.Location_attack, s.Location_attack2, s.full_location, s.Location_attack3, s.Activity, s.Shark, s.geometry, s.id
+      s."Date", s."Time", s."Location", s."Location_attack", s."Location_attack2", s.full_location, s."Location_attack3", s."Activity", s."Shark", s.geometry, s.id
       FROM shark_attacks as s
       WHERE st_intersects(s.geometry, 
                   st_transform(
