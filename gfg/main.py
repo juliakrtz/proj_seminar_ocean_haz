@@ -186,49 +186,18 @@ def gfg():
        connection = get_db_connection()
        cursor = connection.cursor()
        
-      # getting data to display on the map
+      # getting the separate data types to display on the map
        bottom_type = get_bottom_type(x,y,connection)
+       shark_attacks = get_shark_attacks(x,y,connection)
+       coral_reefs = get_coral_reefs(x, y, connection)
+       hazard_areas = get_hazard_areas(x, y, connection)
 
        #render the result form with data
-       return render_template("results.html", bottom_type = bottom_type)
+       return render_template("results.html", bottom_type = bottom_type, shark_attacks = shark_attacks, coral_reefs = coral_reefs, hazard_areas = hazard_areas)
+
    else:
       #render the input page
       return render_template("input.html")
-       
-
+   
 if __name__=='__main__':
    app.run()
-
-
-# #testing code 
-# @app.route('/')
-# #convert coral reefs data from postgis to dictionary
-# data_coral_reefs = gpd.read_postgis("postgresql://postgres:postgres@localhost:5432/geotech_ocean_haz/coral_reefs")
-# data_dict = data_coral_reefs.to_dict()
-
-# #convert dictionary to geojson
-# coral_reefsjsonFeature = json.dumps(data_dict)
-
-# #add geojson to the map
-# L.geoJSON(coral_reefsjsonFeature).addTo(map)
-
-# #send variable to html using flask
-# return render_template("index.html", coral_reefsjsonFeature = json.dumps(data_dict))
-
-
-
-
-
-
-# def get_db_connection():
-#     conn = sqllite3.connect('geotech_ocean_haz.db')
-#     conn.row_factory = sqlite3.Row
-#     return conn 
-
-# rows_list=[]
-# for objectid,acres,featureuid, geometry in cursor:
-#     data= {'OBJECTID':objectid, 'ACRES':acres, 'FEATUREUID':featureuid, 'GEOMETRY':geometry}
-#     rows_list.append(data)
-# #gdf=gpd.GeoDataFrame(rows_list, crs='epsg:4326').set_index('OBJECTID')
-# #gdf.head()
-# print(rows_list)
