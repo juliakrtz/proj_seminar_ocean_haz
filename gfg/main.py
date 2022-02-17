@@ -182,10 +182,13 @@ def gfg():
        y = request.form.get("lat")  
        print(x,y)
 
+      #connecting to the database
        connection = get_db_connection()
        cursor = connection.cursor()
-
+       
+      # getting data to display on the map
        bottom_type = get_bottom_type(x,y,connection)
+
        #render the result form with data
        return render_template("results.html", bottom_type = bottom_type)
    else:

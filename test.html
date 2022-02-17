@@ -35,29 +35,61 @@
 
     function tableFromJson() {
 		// the json data. (you can change the values for output.)
-        var myBooks = [
-            {'Book ID': '1', 'Book Name': 'Challenging Times',
-                'Category': 'Business', 'Price': '125.60'
-            },
-            {'Book ID': '2', 'Book Name': 'Learning JavaScript',
-                'Category': 'Programming', 'Price': '56.00'
-            },
-            {'Book ID': '3', 'Book Name': 'Popular Science',
-                'Category': 'Science', 'Price': '210.40'
-            }
-        ]
+        var myBooks = {
+                            "time": "2022-02-17T16:00:00+00:00",
+                            "waveDirection": {
+                                "noaa": 275.93
+                            },
+                            "waveHeight": {
+                                "noaa": 0.92
+                            },
+                            "windDirection": {
+                                "noaa": 79.69
+                            },
+                            "windSpeed": {
+                                "noaa": 0.64
+                            }
+                        }
+        
+        
+        // [
+        //     {
+        //         "Book ID": "1",
+        //         "Book Name": "Computer Architecture",
+        //         "Category": "Computers",
+        //         "Price": "125.60"
+        //     },
+        //     {
+        //         "Book ID": "2",
+        //         "Book Name": "Asp.Net 4 Blue Book",
+        //         "Category": "Programming",
+        //         "Price": "56.00"
+        //     },
+        //     {
+        //         "Book ID": "3",
+        //         "Book Name": "Popular Science",
+        //         "Category": "Science",
+        //         "Price": "210.40"
+        //     }
+        // ]
+        
+        
+        Object.keys(myBooks).forEach(key => {
+
+        })
+        
 
         // Extract value from table header. 
         // ('Book ID', 'Book Name', 'Category' and 'Price')
         var col = [];
-        for (var i = 0; i < myBooks.length; i++) {
+        for (var i = 1; i < myBooks.length; i++) {
             for (var key in myBooks[i]) {
                 if (col.indexOf(key) === -1) {
                     col.push(key);
                 }
             }
         }
-
+        // && (key === "waveDirection" || key === "waveHeight" || key == "windDirection" || key == "windSpeed"))
         // Create a table.
         var table = document.createElement("table");
 
@@ -71,7 +103,7 @@
         }
 
         // add json data to the table as rows.
-        for (var i = 0; i < myBooks.length; i++) {
+        for (var i = 1; i < myBooks.length; i++) {
 
             tr = table.insertRow(-1);
 
