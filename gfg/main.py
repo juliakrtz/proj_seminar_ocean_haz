@@ -134,12 +134,12 @@ def get_hazard_areas(x,y,connection):
    FROM (
    SELECT jsonb_build_object(
       'type',       'Feature',
-      'id',         id,
+      'id',         "Id",
       'geometry',   ST_AsGeoJSON(geometry)::jsonb,
-      'properties', to_jsonb(inputs) - 'id' - 'geometry'
+      'properties', to_jsonb(inputs) - 'Id' - 'geometry'
    ) AS feature
    FROM (SELECT 
-      h.id, h.gridcode, h.geometry
+      h."Id", h.gridcode, h.geometry
       FROM hazard_areas as h
       WHERE st_intersects(h.geometry, 
                   st_transform(
@@ -157,7 +157,7 @@ def get_hazard_areas(x,y,connection):
    feature_collection_dict_hazard_areas = feature_collection_hazard_areas.iloc[0]['jsonb_build_object']
 
    #Converting to geojson
-   hazard_feature_collection = json.dumps(feature_collection_dict_hazard_areaas)
+   hazard_feature_collection = json.dumps(feature_collection_dict_hazard_areas)
    print(hazard_feature_collection)
 
    return  hazard_feature_collection
