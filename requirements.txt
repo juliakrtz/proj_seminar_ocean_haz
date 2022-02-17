@@ -1,6 +1,8 @@
-gdal==3.4.1
+gdal
 geopandas
 geocoder
-sqlalchemy
 geojson
-PyYAML
+json
+arrow
+psycopg2
+flask
