@@ -190,7 +190,7 @@ def gfg():
        hazard_areas = get_hazard_areas(x,y,connection)
 
        #render the result form with data
-       return render_template("results.html", bottom_type = bottom_type, shark_attacks = shark_attacks, coral_reefs = coral_reefs, hazard_areas = hazard_areas)
+       return render_template("results.html", x = x, y = y, bottom_type = bottom_type, shark_attacks = shark_attacks, coral_reefs = coral_reefs, hazard_areas = hazard_areas)
 
    else:
       #render the input page
