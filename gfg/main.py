@@ -171,6 +171,40 @@ def get_db_connection():
 #create Flask application
 app = Flask(__name__)
 
+
+# A decorator used to tell the application
+# which URL is associated function
+@app.route('/', methods =["GET", "POST"]) #importing flask and creating a home route which has both get and post methods
+def gfg():
+   if request.method == "POST": #if requesting method is post, we get the input data from HTML form
+       # getting input with longitude (x) = lon from the HTML form
+       x = request.form.get("lon")
+       # getting input with latitude (y) = lat from the HTML form 
+       y = request.form.get("lat")  
+       print(x,y)
+
+      #connecting to the database
+       connection = get_db_connection()
+       cursor = connection.cursor()
+       
+      # getting the separate data types to display on the map
+       bottom_type = get_bottom_type(x,y,connection)
+       shark_attacks = get_shark_attacks(x,y,connection)
+       coral_reefs = get_coral_reefs(x,y,connection)
+       hazard_areas = get_hazard_areas(x,y,connection)
+
+       #create popup for each data type 
+       seabed = str(seabed)
+       bottom_type = "var {seabed} = L.bottom_type([{x}, {y}]);\ {seabed}.addTo(map).bindPopup".format(seabed=seabed)
+
+       #render the result form with data
+       return render_template("results.html", bottom_type = bottom_type, shark_attacks = shark_attacks, coral_reefs = coral_reefs, hazard_areas = hazard_areas)
+
+   else:
+      #render the input page
+      return render_template("input.html")
+
+   
 # popup example 
 # var geojson = L.geoJson(data, {
 #       onEachFeature: function (feature, layer) {
@@ -194,39 +228,9 @@ app = Flask(__name__)
 
 
 #display popups for each variable point
-bottom_type = "var {seabed} = L.seabed([{x}, {y}]);\ {seabed}.addTo(map).bindPopup" 
-shark_attacks = "var {full_location} = L.full_location([{x}, {y}]);\ {full_location}.addTo(map).bindPopup" 
-coral_reefs = "var {acres} = L.acres([{x}, {y}]);\ {acres}.addTo(map).bindPopup" 
-hazard_areas = "var {gridcode} = L.gridcode([{x}, {y}]);\ {gridcode}.addTo(map).bindPopup" 
-
-
-# A decorator used to tell the application
-# which URL is associated function
-@app.route('/', methods =["GET", "POST"]) #importing flask and creating a home route which has both get and post methods
-def gfg():
-   if request.method == "POST": #if requesting method is post, we get the input data from HTML form
-       # getting input with longitude (x) = lon from the HTML form
-       x = request.form.get("lon")
-       # getting input with latitude (y) = lat from the HTML form 
-       y = request.form.get("lat")  
-       print(x,y)
-
-      #connecting to the database
-       connection = get_db_connection()
-       cursor = connection.cursor()
-       
-      # getting the separate data types to display on the map
-       bottom_type = get_bottom_type(x,y,connection)
-       shark_attacks = get_shark_attacks(x,y,connection)
-       coral_reefs = get_coral_reefs(x, y, connection)
-       hazard_areas = get_hazard_areas(x, y, connection)
-
-       #render the result form with data
-       return render_template("results.html", bottom_type = bottom_type, shark_attacks = shark_attacks, coral_reefs = coral_reefs, hazard_areas = hazard_areas)
-
-   else:
-      #render the input page
-      return render_template("input.html")
+# shark_attacks = "var {full_location} = L.full_location([{x}, {y}]);\ {full_location}.addTo(map).bindPopup" 
+# coral_reefs = "var {acres} = L.acres([{x}, {y}]);\ {acres}.addTo(map).bindPopup" 
+# hazard_areas = "var {gridcode} = L.gridcode([{x}, {y}]);\ {gridcode}.addTo(map).bindPopup"
    
 if __name__=='__main__':
    app.run()
