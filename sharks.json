@@ -1,0 +1,115 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "id": 4,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -158.036483727,
+                    21.48343645
+                ]
+            },
+            "properties": {
+                "Date": "03/05/2021",
+                "Time": " 3:30 pm",
+                "Shark": "Requiem shark, length 5-6 feet",
+                "Activity": "Surfing",
+                "Location": "Oahu",
+                "full_location": "Oahu, Kaneohe",
+                "Location_attack": " Kaneohe",
+                "Location_attack2": " North Beach",
+                "Location_attack3": " approx 10 yds from shore"
+            }
+        },
+        {
+            "id": 17,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -158.036483727,
+                    21.48343645
+                ]
+            },
+            "properties": {
+                "Date": "18/09/2019",
+                "Time": " 10:10 am",
+                "Shark": "Galapagos shark, length 5-9 feet.",
+                "Activity": "Swimming with sharks",
+                "Location": "Oahu",
+                "full_location": "Oahu, Haleiwa",
+                "Location_attack": " Haleiwa",
+                "Location_attack2": " approx 3 miles from shore",
+                "Location_attack3": null
+            }
+        },
+        {
+            "id": 18,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -158.036483727,
+                    21.48343645
+                ]
+            },
+            "properties": {
+                "Date": "18/09/2019",
+                "Time": " 10:10 am",
+                "Shark": "Galapagos shark, length 5-9 feet.",
+                "Activity": "Swimming with sharks",
+                "Location": "Oahu",
+                "full_location": "Oahu, Haleiwa",
+                "Location_attack": " Haleiwa",
+                "Location_attack2": " approx 3 miles from shore",
+                "Location_attack3": null
+            }
+        },
+        {
+            "id": 19,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -158.036483727,
+                    21.48343645
+                ]
+            },
+            "properties": {
+                "Date": "18/09/2019",
+                "Time": " 10:10 am",
+                "Shark": "Galapagos or sandbar, length unknown.",
+                "Activity": "Swimming with sharks",
+                "Location": "Oahu",
+                "full_location": "Oahu, Haleiwa",
+                "Location_attack": " Haleiwa",
+                "Location_attack2": " approx 3 miles from shore",
+                "Location_attack3": null
+            }
+        },
+        {
+            "id": 21,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -158.036483727,
+                    21.48343645
+                ]
+            },
+            "properties": {
+                "Date": "11/08/2019",
+                "Time": " 7:00 pm",
+                "Shark": "Species and length unknown.",
+                "Activity": "Surfing",
+                "Location": "Oahu",
+                "full_location": "Oahu, Makaha Beach",
+                "Location_attack": " Makaha Beach",
+                "Location_attack2": " approx 100 yds from shore",
+                "Location_attack3": null
+            }
+        }
+    ]
+}

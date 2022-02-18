@@ -71,7 +71,7 @@
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        L.geoJSON(bottom_type, {
+        var bottom_layer = L.geoJSON(bottom_type, {
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, geojsonMarkerOptions);
             }
@@ -79,17 +79,17 @@
         
         //.bindPopup("bottom type popup")
 
-        L.geoJSON(shark_attacks, {
-            pointToLayer: function (feature, latlng) {
-                return L.circleMarker(latlng, geojsonMarkerOptions);
+        var coral_layer = L.geoJSON(coral_reefs).addTo(map);
+
+        var hazard_layer = L.geoJSON(hazard_areas, {
+            style: function (feature, latlng) {
+                return {color: "#0000ff"};
             }
         }).addTo(map);
 
-        L.geoJSON(coral_reefs).addTo(map);
-
-        L.geoJSON(hazard_areas, {
-            style: function (feature, latlng) {
-                return {color: "#0000ff"};
+        var shark_layer = L.geoJSON(shark_attacks, {
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, geojsonMarkerOptions);
             }
         }).addTo(map);
 

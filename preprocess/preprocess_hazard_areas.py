@@ -3,13 +3,13 @@ import pandas
 from sqlalchemy import create_engine
 import pyproj 
 
-pyproj.datadir.set_data_dir('C:\\Users\\johnk\\anaconda3\\envs\\ocean_haz\\Library\\share\\proj')  
+#pyproj.datadir.set_data_dir('C:\\Users\\johnk\\anaconda3\\envs\\ocean_haz\\Library\\share\\proj')  
 
 DB_SCHEMA = "sa"
 TABLE = "hazard_areas"
 
 
-url_hazard_areas = "original\hi_hazard_areas.shp"
+url_hazard_areas = "data\original\hi_hazard_areas.shp"
 
 gdf = geopandas.read_file(url_hazard_areas)
 
