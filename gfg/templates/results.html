@@ -87,18 +87,10 @@
 
         L.geoJSON(coral_reefs).addTo(map);
 
-        L.geoJSON(hazard_areas, {
-            style: function (feature, latlng) {
-                return {color: "#0000ff"};
-            }
-        }).addTo(map);
+        L.geoJSON(hazard_areas).addTo(map);
 
 
         
-
-
-
-
     </script>
 
     <div id = form>
