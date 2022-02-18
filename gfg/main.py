@@ -7,8 +7,6 @@ import shapely.wkt
 import geopandas as gpd 
 import pandas as pd
 import json 
-#from  shapely.geometry import Point as Shapely_pt, mapping
-#from geojson import Point as Geoj_pt, Polygon as Geoj_polygon, Feature, Featurecollection
 
 #get bottom type geojson from inputted coordinates
 def get_bottom_type(x,y,connection):
@@ -167,10 +165,8 @@ def get_db_connection():
    connection = psycopg2.connect(database="geotech_ocean_haz", user="postgres", password = "postgres")
    return connection
 
-
 #create Flask application
 app = Flask(__name__)
-
 
 # A decorator used to tell the application
 # which URL is associated function
@@ -192,10 +188,6 @@ def gfg():
        shark_attacks = get_shark_attacks(x,y,connection)
        coral_reefs = get_coral_reefs(x,y,connection)
        hazard_areas = get_hazard_areas(x,y,connection)
-
-       #create popup for each data type 
-       #seabed = str(seabed)
-       #bottom_type = "var {seabed} = L.bottom_type([{x}, {y}]);\ {seabed}.addTo(map).bindPopup".format(seabed=seabed)
 
        #render the result form with data
        return render_template("results.html", bottom_type = bottom_type, shark_attacks = shark_attacks, coral_reefs = coral_reefs, hazard_areas = hazard_areas)

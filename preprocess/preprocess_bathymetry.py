@@ -20,12 +20,6 @@ input_shape_3mile = "https://opendata.arcgis.com/datasets/82fb905c78064559905c8d
 #path to store output raster file with 3 mile clipped
 output_raster_3mile = "data\processed/output_3mile.tif"
 
-# #path to coastline  of hawaii 
-# input_shape_coastline = "https://opendata.arcgis.com/datasets/045b1d5147634e2380566668e04094c6_3.geojson"
-
-# #path to final bathymetry raster
-# output_raster_coastline = "data\processed/output_coastline.tif"
-
 #clip raster with 3 mile nautical geojson
 ds = gdal.Warp(output_raster_3mile,
               input_raster,
