@@ -194,8 +194,8 @@ def gfg():
        hazard_areas = get_hazard_areas(x,y,connection)
 
        #create popup for each data type 
-       seabed = str(seabed)
-       bottom_type = "var {seabed} = L.bottom_type([{x}, {y}]);\ {seabed}.addTo(map).bindPopup".format(seabed=seabed)
+       #seabed = str(seabed)
+       #bottom_type = "var {seabed} = L.bottom_type([{x}, {y}]);\ {seabed}.addTo(map).bindPopup".format(seabed=seabed)
 
        #render the result form with data
        return render_template("results.html", bottom_type = bottom_type, shark_attacks = shark_attacks, coral_reefs = coral_reefs, hazard_areas = hazard_areas)
@@ -203,34 +203,6 @@ def gfg():
    else:
       #render the input page
       return render_template("input.html")
-
-   
-# popup example 
-# var geojson = L.geoJson(data, {
-#       onEachFeature: function (feature, layer) {
-#         layer.bindPopup(feature.properties.name + '<p><b> Line: ' + feature.properties.line + '</b></p>');
-#         //EDIT HERE
-#       }
-#     });
-
-
-#another popup example, leaftlet + python 
-# markers += "var {idd} = L.marker([{latitude}, {longitude}]);\
-#                 {idd}.addTo(map).bindPopup('{brand}<br>{website}');".format(idd=idd, latitude=node.lat,\
-#                                                                              longitude=node.lon,
-#                                                                              brand=shop_brand,\
-#                                                                              website=shop_website)
-
-#another popup example, leaflet documenation page 
-# L.marker([51.5, -0.09]).addTo(map)
-#     .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-#     .openPopup();
-
-
-#display popups for each variable point
-# shark_attacks = "var {full_location} = L.full_location([{x}, {y}]);\ {full_location}.addTo(map).bindPopup" 
-# coral_reefs = "var {acres} = L.acres([{x}, {y}]);\ {acres}.addTo(map).bindPopup" 
-# hazard_areas = "var {gridcode} = L.gridcode([{x}, {y}]);\ {gridcode}.addTo(map).bindPopup"
    
 if __name__=='__main__':
    app.run()
