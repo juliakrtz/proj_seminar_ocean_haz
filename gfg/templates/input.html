@@ -56,6 +56,13 @@
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
+        map.on('click', function(e) {
+        var lat = e.latlng.lat;
+        var lon = e.latlng.lng;
+        document.getElementById('longitude').value = lon;
+        document.getElementById('latitude').value = lat;
+        });
+
     </script>
 
     <div id = form>
