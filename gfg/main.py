@@ -171,6 +171,35 @@ def get_db_connection():
 #create Flask application
 app = Flask(__name__)
 
+# popup example 
+# var geojson = L.geoJson(data, {
+#       onEachFeature: function (feature, layer) {
+#         layer.bindPopup(feature.properties.name + '<p><b> Line: ' + feature.properties.line + '</b></p>');
+#         //EDIT HERE
+#       }
+#     });
+
+
+#another popup example, leaftlet + python 
+# markers += "var {idd} = L.marker([{latitude}, {longitude}]);\
+#                 {idd}.addTo(map).bindPopup('{brand}<br>{website}');".format(idd=idd, latitude=node.lat,\
+#                                                                              longitude=node.lon,
+#                                                                              brand=shop_brand,\
+#                                                                              website=shop_website)
+
+#another popup example, leaflet documenation page 
+# L.marker([51.5, -0.09]).addTo(map)
+#     .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+#     .openPopup();
+
+
+#display popups for each variable point
+bottom_type = "var {seabed} = L.seabed([{x}, {y}]);\ {seabed}.addTo(map).bindPopup" 
+shark_attacks = "var {full_location} = L.full_location([{x}, {y}]);\ {full_location}.addTo(map).bindPopup" 
+coral_reefs = "var {acres} = L.acres([{x}, {y}]);\ {acres}.addTo(map).bindPopup" 
+hazard_areas = "var {gridcode} = L.gridcode([{x}, {y}]);\ {gridcode}.addTo(map).bindPopup" 
+
+
 # A decorator used to tell the application
 # which URL is associated function
 @app.route('/', methods =["GET", "POST"]) #importing flask and creating a home route which has both get and post methods
