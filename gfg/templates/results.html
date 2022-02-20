@@ -76,19 +76,10 @@
                 return L.circleMarker(latlng, geojsonMarkerOptions);
             }
         }).addTo(map);
-        
-        //.bindPopup("bottom type popup")
 
         var coral_layer = L.geoJSON(coral_reefs).addTo(map);
 
-        var hazard_layer = L.geoJSON(hazard_areas, {
-            style: function (feature) {
-                return feature.properties.style;
-            },
-            onEachFeature: function (feature, layer) {
-                layer.bindPopup(feature.properties.name;)
-            }
-        }).addTo(map);
+        var hazard_layer = L.geoJSON(hazard_areas).addTo(map);
 
         var shark_layer = L.geoJSON(shark_attacks, {
             pointToLayer: function (feature, latlng) {
