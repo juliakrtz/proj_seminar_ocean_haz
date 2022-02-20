@@ -76,19 +76,19 @@
                 return L.circleMarker(latlng, geojsonMarkerOptions);
             },
             onEachFeature: function (feature, layer){
-                layer.bindPopup('<p><b> Bottom type:'+ feature.properties.seabed)
+                layer.bindPopup('<p><b> Bottom type: '+ feature.properties.seabed)
             }
         }).addTo(map);
 
         var coral_layer = L.geoJSON(coral_reefs, {
             onEachFeature: function (feature, layer) {
-                layer.bindPopup('<p><b> Area in acres:'+ feature.properties.acres +  '</b></p>')
+                layer.bindPopup('<p><b> Area in acres: '+ feature.properties.acres +  '</b></p>')
             }
         }).addTo(map);
 
         var hazard_layer = L.geoJSON(hazard_areas, {
             onEachFeature: function (feature, layer) {
-                layer.bindPopup('<p><b> Depth in meters:'+ feature.properties.gridcode + '</b></p>')
+                layer.bindPopup('<p><b> Depth in meters: '+ feature.properties.gridcode + '</b></p>')
             }
         }).addTo(map);
 
