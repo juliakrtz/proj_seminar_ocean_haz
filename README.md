@@ -1,2 +1,5 @@
 # proj_seminar_ocean_haz
-project repository for programming seminar class
+
+Millions of people around the world enjoy ocean activities in their day-to-day lives. From surfing to swimming, the ocean is the world's biggest open-resource for sports and recreation. However, participating in ocean activities comes with risk and responsibility. For example, according to Active & Safe, the injury rate for competitive surfers is 1.51 per 1,000 hours of surfing. Factors that contribute to this risk include type of wave, wave height, the break of the wave, wind speed, wind direction, and the unknown incline and composition of the sea floor, which ranges from a variety of things such as coral reefs, hard sand, and submerged rocks. Thus, the nature of the ocean is unpredictable, and can be dangerous if a person does not have the right knowledge about a particular area. It is for this reason that we chose to create our web application for ocean hazards. 
+
+The app enables the user to pick a point on a map, which then produces various ocean hazard data surrouding that point up to 10,000 meters. 

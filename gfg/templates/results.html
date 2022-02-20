@@ -82,8 +82,11 @@
         var coral_layer = L.geoJSON(coral_reefs).addTo(map);
 
         var hazard_layer = L.geoJSON(hazard_areas, {
-            style: function (feature, latlng) {
-                return {color: "#0000ff"};
+            style: function (feature) {
+                return feature.properties.style;
+            },
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup(feature.properties.name;)
             }
         }).addTo(map);
 
