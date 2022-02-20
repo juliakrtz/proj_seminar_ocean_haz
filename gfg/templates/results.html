@@ -76,19 +76,19 @@
                 return L.circleMarker(latlng, geojsonMarkerOptions);
             },
             onEachFeature: function (feature, layer){
-                layer.bindPopup(feature.properties.seabed)
+                layer.bindPopup('<p><b> Bottom type:'+ feature.properties.seabed)
             }
         }).addTo(map);
 
         var coral_layer = L.geoJSON(coral_reefs, {
             onEachFeature: function (feature, layer) {
-                layer.bindPopup(feature.properties.acres + feature.properties.objectid)
+                layer.bindPopup('<p><b> Area in acres:'+ feature.properties.acres +  '</b></p>')
             }
         }).addTo(map);
 
         var hazard_layer = L.geoJSON(hazard_areas, {
             onEachFeature: function (feature, layer) {
-                layer.bindPopup(feature.properties.gridcode + feature.properties.Id)
+                layer.bindPopup('<p><b> Depth in meters:'+ feature.properties.gridcode + '</b></p>')
             }
         }).addTo(map);
 
@@ -97,7 +97,7 @@
                 return L.circleMarker(latlng, geojsonMarkerOptions);
             },
             onEachFeature: function (feature, layer){
-                layer.bindPopup(feature.properties.Location_attack + feature.properties.Location_attack2, feature.properties.full_location, feature.properties.Shark)
+                layer.bindPopup('<p><b> Attack date:' + feature.properties.Date + '</b></p>' + '<p><b> Attack location:' + feature.properties.Location_attack + feature.properties.Location_attack2, feature.properties.full_location, '<p><b> Shark type:' + feature.properties.Shark)
             }
         }).addTo(map);
 
