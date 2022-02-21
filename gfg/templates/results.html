@@ -41,7 +41,11 @@
   </head>
   <body>
     <div id="top">
-        <p style = "text-align:center;"><b>NOVA IMS - Group Project Seminar Proposal: Mapping Oceanic Hazards</b></p>
+        <p style = "text-align:center;"><b>NOVA IMS - Group Project Seminar: Mapping Oceanic Hazards in Hawaii</b></p>
+    </div>
+
+    <div id = "desc">
+        <p style = "text-align:center;"><b>On this page you will find some information about oceanic hazards. Click on the map to get the coordinates and then click the submit buttom to retrieve hazard data surrounding the point.</b></p>
     </div>
 
     <div id="map"></div>
@@ -82,7 +86,6 @@
         var basemap = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-
 
         //return each feature on the map and display popups
         //var bottom_control = L.LayerGroup();
@@ -131,13 +134,12 @@
 
         //adding layers control panel 
 
-
         var baselayers = {"Basemap": basemap};  
         var overlays = {
-            "Bottom Type" : bottom_control,
+            "Bottom Type" : bottom_layer,
             "Coral Reefs" : coral_layer,
-            "Ocean Depth": hazard_layer
-            //"Shark Attacks": shark_layer
+            "Ocean Depth": hazard_layer,
+            "Shark Attacks": shark_layer
         };
     
         L.control.layers(baselayers, overlays, {collapsed: false}).addTo(map)
