@@ -137,7 +137,7 @@
             //"Shark Attacks": shark_layer
         };
     
-        L.control.layers(baselayers).addTo(map)
+        L.control.layers(baselayers, overlays, {collapsed: false}).addTo(map)
         //overlays, {collapsed: "false"}); //.addTo(map);
         //layerControl.addTo(map);
 
