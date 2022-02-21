@@ -68,7 +68,7 @@ def get_shark_attacks(x,y,connection):
                      st_buffer(
                         st_transform(
                            st_setsrid(
-                              st_makepoint({x}, {y}),4326),26904),10000),4326)
+                              st_makepoint({x}, {y}),4326),26904),100000),4326)
                   )
    ) inputs) features'''
 
