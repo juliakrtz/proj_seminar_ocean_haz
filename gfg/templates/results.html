@@ -60,8 +60,10 @@
         fillOpacity: 0.8
         };
 
-        //create the leaflet.js map, centered in hawaii
-        var map = L.map('map').setView([20.749255, -156.767903], 7);
+        //create the leaflet.js map, centered (x,y) values that comes from flask
+        var map = L.map('map').setView([{{y|safe}}, {{x|safe}}], 11);
+
+        //create the variables of the geojson that come from flask
         var bottom_type =  {{bottom_type|safe}};
         var shark_attacks =  {{shark_attacks|safe}};
         var coral_reefs =  {{coral_reefs|safe}};
@@ -112,11 +114,16 @@
         var overlayMaps = {
             "Ocean Hazards" : ocean
         };
-
     
-    L.control.layers(baseMaps, overlayMaps, {position: "topright"}).addTo(map);
+        L.control.layers(baseMaps, overlayMaps, {position: "topright"}).addTo(map);
 
-
+        //pass coordinates to the form when click on the map
+        map.on('click', function(e) {
+        var lat = e.latlng.lat;
+        var lon = e.latlng.lng;
+        document.getElementById('longitude').value = lon;
+        document.getElementById('latitude').value = lat;
+        });
         
     </script>
 

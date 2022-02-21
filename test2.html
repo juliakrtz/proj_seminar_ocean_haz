@@ -196,25 +196,40 @@
         }
 
         var table_sharks = document.createElement("table");
-        var tr = table_sharks.insertRow(-1);                   // table row.
+        var tr_sharks = table_sharks.insertRow(-1);                   // table row.
 
         // add json data to the table as rows.
         console.log(Object.values(sharks_data));
+
+        // sharks_prop.forEach(obj => {
+        //     for (let ket in obj){
+        //         console.log('${key}: ${obj[key]}');
+        //     }
+        // });
+        
+        for (var key in sharks_data.features){
+            var obj = sharks_data.features[key];
+            for (var prop in obj)
+        }
+
+
         for (const [key, value] of Object.entries(sharks_data)) {
             if (key !== "type"){
-                Object.values(sharks_data).forEach(arr => {
-                    arr.forEach(e => {
-                        var th = document.createElement("th");      // table header.
-                        th.innerHTML = key;
-
-                        // Create table header row using the extracted headers above.
-                        tr.appendChild(th);
-                        var tabCell = tr.insertCell(-1);
-                        tabCell.innerHTML =  value;
-                    })
+                sharks_data.forEach(obj => {
+                    for (let key in obj){
+                        console.log('${key}: ${obj[key]}');
+                    }
                 })
+
+                        // var th = document.createElement("th");      // table header.
+                        // th.innerHTML = key;
+
+                        // // Create table header row using the extracted headers above.
+                        // tr.appendChild(th);
+                        // var tabCell = tr.insertCell(-1);
+                        // tabCell.innerHTML =  value;
             }          
-        }
+        };
 
         // Now, add the newly created table with json data, to a container.
         var divShowData2 = document.getElementById('showData2');
