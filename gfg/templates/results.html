@@ -83,7 +83,6 @@
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-
         //return each feature on the map and display popups
         //var bottom_control = L.LayerGroup();
 
@@ -131,13 +130,12 @@
 
         //adding layers control panel 
 
-
         var baselayers = {"Basemap": basemap};  
         var overlays = {
-            "Bottom Type" : bottom_control,
+            "Bottom Type" : bottom_layer,
             "Coral Reefs" : coral_layer,
-            "Ocean Depth": hazard_layer
-            //"Shark Attacks": shark_layer
+            "Ocean Depth": hazard_layer,
+            "Shark Attacks": shark_layer
         };
     
         L.control.layers(baselayers, overlays, {collapsed: false}).addTo(map)
