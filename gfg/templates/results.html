@@ -53,11 +53,21 @@
         //styles bottom type
         var geojsonMarkerOptions = {
         radius: 8,
-        fillColor: "#ff7800",
-        color: "#000",
+        fillColor: "#7FFFD4",
+        color: "#7FFFD4",
         weight: 1,
         opacity: 1,
         fillOpacity: 0.8
+        };
+        
+        //styles shark attacks 
+        var geojsonMarkerOptions_shark = {
+        radius: 8,
+        fillColor: "#008080",
+        color: "#008080",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.4
         };
 
         //create the leaflet.js map, centered (x,y) values that comes from flask
@@ -84,21 +94,33 @@
             }
         }).addTo(map);
 
-        var coral_layer = L.geoJSON(coral_reefs, {
+        var coral_layer = L.geoJSON(coral_reefs,{
             onEachFeature: function (feature, layer) {
                 layer.bindPopup('<p><b> Area in acres: '+ feature.properties.acres +  '</b></p>')
-            }
+            },
+            style: {
+                    color: "orange",
+                    weight: 2,
+                    fillColor: "orange",
+                    fillOpacity: 0.4
+                }
         }).addTo(map);
 
-        var hazard_layer = L.geoJSON(hazard_areas, {
+        var hazard_layer = L.geoJSON(hazard_areas,{
             onEachFeature: function (feature, layer) {
                 layer.bindPopup('<p><b> Depth in meters: '+ feature.properties.gridcode + '</b></p>')
-            }
+            },
+            style: {
+                    color: "red",
+                    weight: 2, 
+                    fillColor: "red",
+                    fillOpacity: 0.4
+                }
         }).addTo(map);
 
         var shark_layer = L.geoJSON(shark_attacks, {
             pointToLayer: function (feature, latlng) {
-                return L.circleMarker(latlng, geojsonMarkerOptions);
+                return L.circleMarker(latlng, geojsonMarkerOptions_shark);
             },
             onEachFeature: function (feature, layer){
                 layer.bindPopup('<p><b> Attack date:' + feature.properties.Date + '</b></p>' + '<p><b> Attack location:' + feature.properties.Location_attack + feature.properties.Location_attack2, feature.properties.full_location, '<p><b> Shark type:' + feature.properties.Shark)
@@ -111,12 +133,13 @@
         var overlays = {
             "Bottom Type" : bottom_layer,
             "Coral Reefs" : coral_layer,
-            "Ocean Depth": hazard_layer,
-            "Shark Attacks": shark_layer
+            "Ocean Depth": hazard_layer
+            //"Shark Attacks": shark_layer
         };
     
-        var layerControl = L.control.layers(baselayers, overlays, {collapsed: "false"}); //.addTo(map);
-        layerControl.addTo(map);
+        L.control.layers(baselayers).addTo(map)
+        //overlays, {collapsed: "false"}); //.addTo(map);
+        //layerControl.addTo(map);
 
         //pass coordinates to the form when click on the map
         map.on('click', function(e) {
