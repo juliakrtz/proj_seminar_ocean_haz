@@ -105,13 +105,12 @@
 
         //adding layers control panel 
 
+        var ocean = L.layerGroup([bottom_layer, coral_layer, hazard_layer, shark_layer]);
+
         var baseMaps = {
             "Basemap": basemap};  
         var overlayMaps = {
-            "Bottom Type" : bottom_layer,
-            "Coral Reefs" : coral_layer, 
-            "Water Depth" : hazard_layer, 
-            "Shark Attacks" : shark_layer
+            "Ocean Hazards" : ocean
         };
 
     
