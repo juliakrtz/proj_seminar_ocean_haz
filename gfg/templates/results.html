@@ -67,10 +67,12 @@
         var coral_reefs =  {{coral_reefs|safe}};
         var hazard_areas =  {{hazard_areas|safe}};
         
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        var basemap = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
+
+        //return each feature on the map and display popups
         var bottom_layer = L.geoJSON(bottom_type, {
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, geojsonMarkerOptions);
@@ -100,6 +102,20 @@
                 layer.bindPopup('<p><b> Attack date:' + feature.properties.Date + '</b></p>' + '<p><b> Attack location:' + feature.properties.Location_attack + feature.properties.Location_attack2, feature.properties.full_location, '<p><b> Shark type:' + feature.properties.Shark)
             }
         }).addTo(map);
+
+        //adding layers control panel 
+
+        var baseMaps = {
+            "Basemap": basemap};  
+        var overlayMaps = {
+            "Bottom Type" : bottom_layer,
+            "Coral Reefs" : coral_layer, 
+            "Water Depth" : hazard_layer, 
+            "Shark Attacks" : shark_layer
+        };
+
+    
+    L.control.layers(baseMaps, overlayMaps, {position: "topright"}).addTo(map);
 
 
         
