@@ -107,15 +107,16 @@
 
         //adding layers control panel 
 
-        var ocean = L.layerGroup([bottom_layer, coral_layer, hazard_layer, shark_layer]);
-
-        var baseMaps = {
-            "Basemap": basemap};  
-        var overlayMaps = {
-            "Ocean Hazards" : ocean
+        var baselayers = {"Basemap": basemap};  
+        var overlays = {
+            "Bottom Type" : bottom_layer,
+            "Coral Reefs" : coral_layer,
+            "Ocean Depth": hazard_layer,
+            "Shark Attacks": shark_layer
         };
     
-        L.control.layers(baseMaps, overlayMaps, {position: "topright"}).addTo(map);
+        var layerControl = L.control.layers(baselayers, overlays, {collapsed: "false"}); //.addTo(map);
+        layerControl.addTo(map);
 
         //pass coordinates to the form when click on the map
         map.on('click', function(e) {
