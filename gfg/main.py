@@ -1,10 +1,6 @@
-from flask import Flask, render_template, jsonify, request, redirect #importing Flask and other modules
-import sqlite3
+from flask import Flask, render_template, jsonify, request, redirect
 import psycopg2 
 import osgeo.ogr
-import shapely
-import shapely.wkt 
-import geopandas as gpd 
 import pandas as pd
 import json 
 

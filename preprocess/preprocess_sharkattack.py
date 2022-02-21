@@ -1,18 +1,15 @@
-#import
 import pandas as pd
 import geopandas
 import geocoder 
-# import etl as e
 import csv
 import sqlalchemy as sql 
 from sqlalchemy import create_engine 
 from shapely.geometry import Point
-import pyproj 
+import pyproj
 
-pyproj.datadir.set_data_dir('C:\\Users\\johnk\\anaconda3\\envs\\ocean_haz\\Library\\share\\proj')
+#yproj.datadir.set_data_dir('C:\\Users\\johnk\\anaconda3\\envs\\ocean_haz\\Library\\share\\proj')
 
-
-DB_SCHEMA = "sa"
+#set the table name in the database
 TABLE = "shark_attacks"
 
 #path to shark attack csv file
@@ -21,10 +18,9 @@ shark_attacks = "data\original\shark_attacks.csv"
 #path to shark attack csv file with coordinates
 shark_attacks_geo = "data\processed\shark_attacks_geo.csv"
 
-#convert csv file to dataframe
+#get the csv file and convert it to dataframe
 df = pd.read_csv(shark_attacks, encoding = 'cp1252', sep=";", header="infer")
 df.insert(5, 'full_location', (df.Location + "," + df.Location_attack), allow_duplicates=False)
-
 
 #geocoding function 
 def geocoding(input_island):
@@ -33,13 +29,13 @@ def geocoding(input_island):
 
 #geocode the location of shark attacks
 def geocode(df: pd.DataFrame):
-    ##apply function to dataframe in full_location column
         df['locations'] = df['Location'].apply(geocoding)
         df[['lon','lat']] = pd.DataFrame(df['locations'].tolist(), 
             index = df.index)
         return df
 
 #convert the geocoded shark attacks to csv and save it
+#this step is made in order to not repeat the geocoding function every time running file
 def write_csv(df, output_csv):
     df.to_csv(
         output_csv,
@@ -62,22 +58,17 @@ def insert_data(gdf: geopandas.GeoDataFrame, table: str, chunksize: int=100) -> 
         chunksize (int): the number of rows to insert at the time
     """
     engine = sql.create_engine('postgresql://postgres:postgres@localhost:5432/geotech_ocean_haz')
-        # with engine.connect() as con:
-        #     tran = con.begin()
     gdf.to_postgis(
                 name=table, #schema=schema,
                 con=engine,
                 chunksize=chunksize #, method="multi"
             )
-    #         tran.commit()
-    # except Exception as e:
-    #     if 'tran' in locals():
-    #         tran.rollback()
-    #     (f"{e}")
 
+#Uncomment this if it is the 1s time running the file!
 # #run the geocoding to the dataframe
 # df = geocode(df)
 
+#Uncomment this if it is the 1s time running the file!
 # #get the geocoded dataframe and store it as csv
 # #this path was made in order to store the geocoded file and avoid running the geocoding everytime
 # write_csv(df, shark_attacks_geo) 
@@ -91,21 +82,6 @@ gdf = geopandas.GeoDataFrame(
     crs= {'init': 'EPSG:4326'},
     geometry= geopandas.points_from_xy(df_geocoded.lon, df_geocoded.lat)
 )
-#print(gdf)
 
 #insert the shark attacks to the database
-#db = e.DBController(**config["database"])
 insert_data(gdf=gdf, table=TABLE, chunksize=1000)
-
-
- 
-#df.head()
-
-##upload geocoded dataframe to postgis
-
-#set up database connection engine
-# engine = create_engine('postgresql://postgres:postgres@localhost:5432/geotech_ocean_haz')
-# df.to_sql(
-#     con=engine,
-#     name= "shark_attacks"
-# )
