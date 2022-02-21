@@ -75,6 +75,8 @@
 
 
         //return each feature on the map and display popups
+        //var bottom_control = L.LayerGroup();
+
         var bottom_layer = L.geoJSON(bottom_type, {
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, geojsonMarkerOptions);
@@ -83,6 +85,8 @@
                 layer.bindPopup('<p><b> Bottom type: '+ feature.properties.seabed)
             }
         }).addTo(map);
+
+        //bottom_control.addLayer(bottom_layer);
 
         var coral_layer = L.geoJSON(coral_reefs, {
             onEachFeature: function (feature, layer) {
@@ -107,9 +111,10 @@
 
         //adding layers control panel 
 
+
         var baselayers = {"Basemap": basemap};  
         var overlays = {
-            "Bottom Type" : bottom_layer,
+            "Bottom Type" : bottom_control,
             "Coral Reefs" : coral_layer,
             "Ocean Depth": hazard_layer,
             "Shark Attacks": shark_layer
