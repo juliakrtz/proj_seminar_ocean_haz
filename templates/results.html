@@ -205,22 +205,22 @@
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        //return each feature on the map and display popups
+        //return each feature and display popups
 
-        var bottom_layer = L.geoJSON(bottom_type, {
+        var bottom_layer = L.geoJSON(bottom_type, { //create the variable bottom_layer, which references bottom_type defined above
             pointToLayer: function (feature, latlng) {
-                return L.circleMarker(latlng, geojsonMarkerOptions);
+                return L.circleMarker(latlng, geojsonMarkerOptions); //style of the feature, in this case a point. geojsonMarkerOptions further style is referenced above
             },
-            onEachFeature: function (feature, layer){
-                layer.bindPopup('<p><b> Bottom type: '+ feature.properties.seabed)
+            onEachFeature: function (feature, layer){ //creating the popup on each feature
+                layer.bindPopup('<p><b> Bottom type: '+ feature.properties.seabed) //string and following column which is displayed in the popup
             }
-        }).addTo(map);
+        }).addTo(map); //add the layer to the map
 
         var coral_layer = L.geoJSON(coral_reefs,{
             onEachFeature: function (feature, layer) {
-                layer.bindPopup('<p><b> Area in acres: '+ feature.properties.acres +  '</b></p>')
+                layer.bindPopup('<p><b> Area in acres: '+ feature.properties.acres +  '</b></p>') //this ending is different because the column contains integers we want displayed in the popup
             },
-            style: {
+            style: { //this feature is not a circle marker/point, so we include the style here 
                     color: "orange",
                     weight: 2,
                     fillColor: "orange",
@@ -249,7 +249,7 @@
             }
         }).addTo(map);
 
-        //adding layers control panel 
+        //adding layers control panel to switch on and off layers, did this according to Leaflet documentation with Geojson 
 
         var baselayers = {"Basemap": basemap};  
         var overlays = {
@@ -260,10 +260,8 @@
         };
     
         L.control.layers(baselayers, overlays, {collapsed: false}).addTo(map)
-        //overlays, {collapsed: "false"}); //.addTo(map);
-        //layerControl.addTo(map);
 
-        //adding a legend to the map
+        //adding a legend to the map, again according to Leaflet documentation (specifically L.Control functions)
         var legend = L.control({position: 'bottomright'});
         legend.onAdd = function(){
             var div = L.DomUtil.create('div', 'legend');
@@ -283,7 +281,7 @@
         document.getElementById('latitude').value = lat;
         });
         
-    //Table of weather data
+    //create variable for the table of weather data
         var table_weather = document.createElement("table");
 
         // add json data to the table as rows.

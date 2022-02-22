@@ -7,7 +7,7 @@ from sqlalchemy import create_engine
 from shapely.geometry import Point
 import pyproj
 
-#yproj.datadir.set_data_dir('C:\\Users\\johnk\\anaconda3\\envs\\ocean_haz\\Library\\share\\proj')
+#proj.datadir.set_data_dir('C:\\Users\\johnk\\anaconda3\\envs\\ocean_haz\\Library\\share\\proj')
 
 #set the table name in the database
 TABLE = "shark_attacks"
