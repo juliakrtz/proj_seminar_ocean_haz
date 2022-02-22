@@ -4,10 +4,19 @@ import osgeo.ogr
 import pandas as pd
 import json
 from weather_API import get_weather
-#from .get_data import get_bottom_type
 
 #get bottom type geojson from inputted coordinates
 def get_bottom_type(x,y,connection):
+   """ Query and select bottom_type data from the database, store it in a dataframe and convert it to geojson
+
+      Args:
+            x (integer): longitude value
+            y (integer): latitude value
+            connection (string): credentials and connection to the database
+
+      Returns:
+            results from the query in json format
+   """
    #query that gives a Feature Collection object
    query_bottom_type = f'''SELECT jsonb_build_object(
       'type',     'FeatureCollection',
@@ -46,6 +55,16 @@ def get_bottom_type(x,y,connection):
 
 #get shark attacks geojson from inputted coordinates
 def get_shark_attacks(x,y,connection):
+   """ Query and select shark_attack data from the database, store it in a dataframe and convert it to geojson
+
+      Args:
+            x (integer): longitude value
+            y (integer): latitude value
+            connection (string): credentials and connection to the database
+
+      Returns:
+            results from the query in json format
+   """
    #query that gives a Feature Collection object
    query_shark_attacks = f'''SELECT jsonb_build_object(
       'type',     'FeatureCollection',
@@ -86,6 +105,16 @@ def get_shark_attacks(x,y,connection):
 
 #get coral reefs geojson from inputted coordinates
 def get_coral_reefs(x,y,connection):
+   """ Query and select coral_reefs data from the database, store it in a dataframe and convert it to geojson
+
+      Args:
+            x (integer): longitude value
+            y (integer): latitude value
+            connection (string): credentials and connection to the database
+
+      Returns:
+            results from the query in json format
+   """
    #query that gives a Feature Collection object
    query_coral_reefs = f'''SELECT jsonb_build_object(
       'type',     'FeatureCollection',
@@ -124,6 +153,16 @@ def get_coral_reefs(x,y,connection):
 
 #get hazard areas geojson from inputted coordinates
 def get_hazard_areas(x,y,connection):
+   """ Query and select hazard_areas data from the database, store it in a dataframe and convert it to geojson
+
+      Args:
+            x (integer): longitude value
+            y (integer): latitude value
+            connection (string): credentials and connection to the database
+
+      Returns:
+            results from the query in json format
+   """
    #query that gives a Feature Collection object
    query_hazard_areas = f'''SELECT jsonb_build_object(
       'type',     'FeatureCollection',
@@ -162,6 +201,11 @@ def get_hazard_areas(x,y,connection):
 
 #get connection to the Postgres database
 def get_db_connection():
+   """ Creates a connection to the database
+
+      Returns:
+            the connection to the database
+   """
    connection = psycopg2.connect(database="geotech_ocean_haz", user="postgres", password = "postgres")
    return connection
 

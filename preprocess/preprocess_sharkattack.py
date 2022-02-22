@@ -24,11 +24,27 @@ df.insert(5, 'full_location', (df.Location + "," + df.Location_attack), allow_du
 
 #geocoding function 
 def geocoding(input_island):
+    """ Geocode location using Open Street Map data
+
+        Args:
+            input_island (string): the location we want to geocode
+
+        Returns:
+            x and y values for each location
+    """
     g = geocoder.osm(input_island, country_codes= 'us')
     return g.osm['x'], g.osm['y']
 
 #geocode the location of shark attacks
 def geocode(df: pd.DataFrame):
+        """ Geocode attribute "location" from dataframe and inserts the x and y values to the dataframe
+
+            Args:
+                df (dataframe): the dataframe which contains the "location" attribute we want to geocode
+
+            Returns:
+                dataframe with the (x,y) attributes
+        """
         df['locations'] = df['Location'].apply(geocoding)
         df[['lon','lat']] = pd.DataFrame(df['locations'].tolist(), 
             index = df.index)
@@ -37,6 +53,13 @@ def geocode(df: pd.DataFrame):
 #convert the geocoded shark attacks to csv and save it
 #this step is made in order to not repeat the geocoding function every time running file
 def write_csv(df, output_csv):
+    """ Convert dataframe to a csv file
+
+        Args:
+            df (dataframe): the dataframe we want to convert to csv
+            output_csv (string): path to where we want to save the output csv
+
+    """
     df.to_csv(
         output_csv,
         sep= ";",
