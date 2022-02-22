@@ -1,6 +1,0 @@
-database:
-  database: geotech_ocean_haz
-  host: localhost
-  port: 5432
-  username: postgres
-  password: postgres
