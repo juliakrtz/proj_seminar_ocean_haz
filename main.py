@@ -190,11 +190,11 @@ def gfg():
        hazard_areas = get_hazard_areas(x,y,connection)
 
        #getting weather data from weather API
-      #  weather_data = get_weather(x,y)
-      #  weather_json = json.dumps(weather_data['hours'][0])
+       weather_data = get_weather(x,y)
+       weather_json = json.dumps(weather_data['hours'][0])
 
        #render the result form with data
-       return render_template("results.html", x = x, y = y, bottom_type = bottom_type, shark_attacks = shark_attacks, coral_reefs = coral_reefs, hazard_areas = hazard_areas) #, weather_json = weather_json)
+       return render_template("results.html", x = x, y = y, bottom_type = bottom_type, shark_attacks = shark_attacks, coral_reefs = coral_reefs, hazard_areas = hazard_areas, weather_json = weather_json)
 
    else:
       #render the input page

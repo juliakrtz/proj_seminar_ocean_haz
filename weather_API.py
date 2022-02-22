@@ -2,7 +2,8 @@ import arrow
 import requests
 
 def get_weather(x,y):
-  API_key = "23bd5da0-8f49-11ec-a301-0242ac130002-23bd5e18-8f49-11ec-a301-0242ac130002"
+  API_key = "389b62d8-8758-11ec-8bae-0242ac130002-389b6350-8758-11ec-8bae-0242ac130002" #julia's key
+  #"23bd5da0-8f49-11ec-a301-0242ac130002-23bd5e18-8f49-11ec-a301-0242ac130002" #paula's key
 
   # Get first hour of today
   start = arrow.now().floor('hour')
