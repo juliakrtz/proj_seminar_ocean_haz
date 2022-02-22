@@ -2,7 +2,8 @@ from flask import Flask, render_template, jsonify, request, redirect
 import psycopg2 
 import osgeo.ogr
 import pandas as pd
-import json 
+import json
+from weather_API import get_weather
 #from .get_data import get_bottom_type
 
 #get bottom type geojson from inputted coordinates
@@ -67,6 +68,9 @@ def get_shark_attacks(x,y,connection):
                            st_setsrid(
                               st_makepoint({x}, {y}),4326),26904),100000),4326)
                   )
+                        )
+      ORDER BY s."Date"
+      LIMIT 5
    ) inputs) features'''
 
    #Reads the query and store it in a dataframe
@@ -186,8 +190,12 @@ def gfg():
        coral_reefs = get_coral_reefs(x,y,connection)
        hazard_areas = get_hazard_areas(x,y,connection)
 
+       #getting weather data from weather API
+       weather_data = get_weather(x,y)
+       weather_json = json.dumps(weather_data['hours'][0])
+
        #render the result form with data
-       return render_template("results.html", x = x, y = y, bottom_type = bottom_type, shark_attacks = shark_attacks, coral_reefs = coral_reefs, hazard_areas = hazard_areas)
+       return render_template("results.html", x = x, y = y, bottom_type = bottom_type, shark_attacks = shark_attacks, coral_reefs = coral_reefs, hazard_areas = hazard_areas, weather_json = weather_json)
 
    else:
       #render the input page

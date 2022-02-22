@@ -111,17 +111,21 @@
             <p><b>Some data about the weather at this location now:</b></p>
         </div>
 
+        <div id='table1'></div>
+
         <div id = "desc2">
             <p><b>Past shark attacks in the region:</b></p>
         </div>
+
+        <div id='table2'></div>
         
     </div>
-
 
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
 
     <script type="text/javascript">
-
+    
+    //Map
         //styles bottom type
         var geojsonMarkerOptions = {
         radius: 8,
@@ -233,6 +237,66 @@
         document.getElementById('latitude').value = lat;
         });
         
+    //Table of weather data
+        var table_weather = document.createElement("table");
+
+        // add json data to the table as rows.
+        for (const [key, value] of Object.entries({{weather_json|safe}})) {
+            if (key !== "time"){
+                var th = document.createElement("th");      // table header.
+                th.innerHTML = key;
+
+                // Create table header row using the extracted headers above.
+                var tr = table_weather.insertRow(-1);                   // table row.
+                tr.appendChild(th);
+                var tabCell = tr.insertCell(-1);
+                tabCell.innerHTML =  Object.values(value);
+            }          
+        }   
+
+        // Now, add the newly created table with json data, to a container.
+        var divShowData = document.getElementById('table1');
+        divShowData.innerHTML = "";
+        divShowData.appendChild(table_weather);
+    
+    //Table of Shark Attacks
+        var col = [];
+        sharks_data = {{shark_attacks|safe}};
+
+        for (const properties of sharks_data.features){
+            for (const key of Object.keys(properties.properties)){
+                if (col.indexOf(key) === -1) {
+                    col.push(key);
+                }
+            }
+        };
+
+        var table_sharks = document.createElement("table");
+        var tr_sharks = table_sharks.insertRow(-1);                   // table row.
+
+        for (var i = 0; i < col.length; i++) {
+            var th_shark = document.createElement("th");      // TABLE HEADER.
+            th_shark.innerHTML = col[i];
+            tr_sharks.appendChild(th_shark);
+        };
+        console.log(col);           
+        
+        // ADD JSON DATA TO THE TABLE AS ROWS.
+        for (const properties of sharks_data.features){
+            for (const [key,value] of Object.entries(properties.properties)){
+                // console.log(col)
+                tr_sharks = table_sharks.insertRow(-1);
+                
+                 for (var j = 0; j < col.length; j++) {
+                     var tabCell = tr_sharks.insertCell(-1);
+                     tabCell.innerHTML = properties.properties[col[j]];
+                 }
+            }
+        };
+        // Now, add the newly created table with json data, to a container.
+        var divShowData2 = document.getElementById('table2');
+        divShowData2.innerHTML = "";
+        divShowData2.appendChild(table_sharks);
     </script>
 
   </body>
