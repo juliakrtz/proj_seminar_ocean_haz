@@ -42,13 +42,20 @@
 		}        
         #form {
 			width: 45%;
-			height: 70px;
+			height: 60px;
 			/* float:right; */
             font: 15px Arial, Helvetica, sans-serif;
             color: #524f4f;
-            margin: 20px;
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-bottom: 10px;
             position: relative;
 		    }
+        #weather {
+            width: 100%;
+			height: 60px;
+            position: relative;
+        }
         #desc2 {
 			width: 100%;
 			height: 22px;
@@ -76,6 +83,40 @@
         }
         div.legend.leaflet-control br {
             clear: both;
+        }
+        #table1 {
+			width: 20%;
+			height: 80px;
+			float:left;
+            position: relative;
+        }
+        #table2 {
+			width: 20%;
+			height: 50px;
+			float:left;
+            position: relative;
+        }
+        #desc2 {
+			width: 100%;
+			height: 22px;
+            margin: 20px;
+			float:left;
+            font: 13px Arial, Helvetica, sans-serif;
+            color: #7a7474;
+            position: relative;
+		}
+        th, td, {
+            font:15px 'Arial, Helvetica, sans-serif';
+        }
+        table, th, td {
+            border: solid 1px #ddd;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+            margin: 5px;
+        }
+        th {
+            font-weight:bold;
         }
 
       </style>
@@ -111,7 +152,12 @@
             <p><b>Some data about the weather at this location now:</b></p>
         </div>
 
-        <div id='table1'></div>
+        <div id="weather">
+            <div id='table1'></div>
+            <div style = 'float:left'>
+                <img src="https://img.pixers.pics/pho_wat(s3:700/FO/66/92/40/00/700_FO66924000_b0812316c8562f1efdc8b92bfc7c4cc1.jpg,700,698,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,482,650,jpg)/murais-de-parede-compass-rose-isolated-on-white.jpg.jpg" alt="Compass image" width="150px" style="margin-left:35%;margin-top:5%">
+            </div>
+        </div>
 
         <div id = "desc2">
             <p><b>Past shark attacks in the region:</b></p>

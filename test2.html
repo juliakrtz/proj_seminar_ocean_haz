@@ -14,6 +14,11 @@
 			float:left;
             position: relative;
 		} 
+        #weather {
+            width: 100%;
+			height: 60px;
+            position: relative;
+        }
         #table1 {
 			width: 20%;
 			height: 80px;
@@ -59,8 +64,13 @@
             <p><b>Some data about the weather at this location now:</b></p>
         </div>
     
-        <div id='table1'></div>
-    
+        <div id="weather">
+            <div id='table1'></div>
+            <div style = 'float:left'>
+                <img src="compass.jpg" alt="Compass image" width="100px" style="margin-left:35%;margin-top:5%">
+            </div>
+        </div>
+
         <div id = "desc2">
             <p><b>Past shark attacks in the region:</b></p>
         </div>
