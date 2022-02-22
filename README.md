@@ -16,8 +16,8 @@ The objective of this web application is to provide the user with information on
 
 ## Data  
 Data used:
-* Sea bottom type: retrieved from Hawaii’s GIS official website;
-* Coral reefs: retrieved from Hawaii’s GIS official website;
+* Sea bottom type: retrieved from [Hawaii’s GIS official website](https://geoportal.hawaii.gov/);
+* Coral reefs: retrieved from [Hawaii’s GIS official website](https://geoportal.hawaii.gov/);
 * Shark Attacks: retrieved from https://dlnr.hawaii.gov/sharks/shark-incidents/incidents-list/ and stored locally as csv inside “data\original” folder;
 * Hazard Areas/ocean depth: extracted shallow areas from bathymetry data available at https://download.gebco.net/ and stored locally as shapefile inside “data\original” folder;
 * Weather data: retrieved from stormglass API (https://stormglass.io/).
@@ -33,7 +33,7 @@ The frontend is structured in two html files, the “input.html” for the first
 
 The diagram below shows the project structure.
 
-![alt text](figures/sturcture.png?raw=true)
+![alt text](figures/structure.png?raw=true)
 
 ## App Functionality: Running It On Your Own 
 
@@ -68,6 +68,12 @@ Some limitations and possible issues in the project are:
 * Weather data can be requested maximum 10 times per day;
 * In the results page, map controls (legend and layer control) don’t show up when one of the layers are not retrieved from the buffer query;
 * Also in the results page, shark attacks table shows repeated values.
+
+Next steps to this project: 
+* Create a centrally located DB connection 
+* find an open-source API for the weather data
+* fix the shark attacks data table
+* visually display the buffer so that the user can see where the data stops for their specified point
 
 ## Conclusions
 
