@@ -4,5 +4,6 @@ geocoder
 geojson
 json
 arrow
+sqlalchemy
 psycopg2
 flask
