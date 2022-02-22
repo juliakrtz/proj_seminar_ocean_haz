@@ -2,6 +2,7 @@ gdal
 geopandas
 pandas
 osgeo
+shapely.geometry
 geocoder
 geojson
 json
