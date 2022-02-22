@@ -15,11 +15,12 @@ Thus, for surfers and other ocean-goers alike, the nature of the ocean is unpred
 The objective of this web application is to provide the user with information on ocean hazards from a point they pick on the map. The hope is to help reduce the amount of ocean-related injuries sustained by people who are unfamiliar with a particular spot, or who do not know the weather conditions on a given day and thus step into a more dangerous situation than they intend to. Since the data which was utilized in this application is connected to a database which is regularly updated, this means that the data which the user is able to access will hopefully achieve the objective and reduce ocean-related injuries.
 
 ## Data  
+
 Data used:
 * Sea bottom type: retrieved from [Hawaii’s GIS official website](https://geoportal.hawaii.gov/);
 * Coral reefs: retrieved from [Hawaii’s GIS official website](https://geoportal.hawaii.gov/);
-* Shark Attacks: retrieved from https://dlnr.hawaii.gov/sharks/shark-incidents/incidents-list/ and stored locally as csv inside “data\original” folder;
-* Hazard Areas/ocean depth: extracted shallow areas from bathymetry data available at https://download.gebco.net/ and stored locally as shapefile inside “data\original” folder;
+* Shark Attacks: retrieved from [shark attacks incidents list from State of Hawaii's site](https://dlnr.hawaii.gov/sharks/shark-incidents/incidents-list/) and stored locally as csv inside “data\original” folder;
+* Hazard Areas/ocean depth: extracted shallow areas from bathymetry data from General Bathymetric Chart of the Oceans - GEBCO, available at their [data download website](https://download.gebco.net/), and stored locally as shapefile inside “data\original” folder;
 * Weather data: retrieved from stormglass API (https://stormglass.io/).
 
 ## Methods  
