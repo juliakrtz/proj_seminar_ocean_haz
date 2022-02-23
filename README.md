@@ -25,10 +25,10 @@ Data used:
 
 ## Methods  
 
-The application was built in python for all the backend functionalities and in javascript for the front end and interaction with the user.
+The application was built in Python for all the backend functionalities and in JavaScript for the frontend and interaction with the user.
 The backend is structured in the pre-process modules and a main.py file.
-The pre-process modules get the source data, process it (in the case of shark attacks data) and store it in the database. At this step, the python library sqlalchemy is used to connect to the database and insert the data into PostGIS. For the shark attacks data, a geographic location was not included in the original dataset, and thus locations for the shark attacks were geocoded using the geocoder library.
-In the main file, a flask application is created and all queries are made in order to get the data from the database. The queries are run with the inputted coordinates in the html, where it gets all data within a certain radius. Weather data was retrieved from stormglass API, using the inputted coordinates as well. To connect to the database and make the queries, it was used the psycopg2 library. 
+The pre-process modules get the source data, process it (in the case of shark attacks data) and store it in the database. At this step, the Python library sqlalchemy is used to connect to the database and insert the data into PostGIS. For the shark attacks data, a geographic location was not included in the original dataset, and thus locations for the shark attacks were geocoded using the geocoder library.
+In the main file, a flask application was created and queries were made in order to get the data from the database. The queries then run with the inputted coordinates from the html, where it gets all data within a radius of 10,000 meters. Weather data was retrieved from stormglass API, using the inputted coordinates as well. To connect to the database and make the queries, the psycopg2 library was used. 
 
 The frontend is structured in two html files, the “input.html” for the first interaction with the user, where no data is shown, and the “results.html” which is shown after the coordinates are submitted in the form. All the data retrieved from the database is displayed in the map as well as tables in the case of the weather data and shark attacks. To display the spatial data in a map, the JavaScript library Leaflet was used. 
 
@@ -68,13 +68,13 @@ Some limitations and possible issues in the project are:
 * It is necessary to create manually a unique ID for the shark attacks table in PostgreSQL;
 * Weather data can be requested maximum 10 times per day;
 * In the results page, map controls (legend and layer control) don’t show up when one of the layers are not retrieved from the buffer query;
-* Also in the results page, shark attacks table shows repeated values.
+* Also in the results page, the shark attacks table shows repeated values
 
 Next steps to this project: 
 * Create a centrally located DB connection 
-* find an open-source API for the weather data
-* fix the shark attacks data table
-* visually display the buffer so that the user can see where the data stops for their specified point
+* Find an open-source API for the weather data
+* Fix the shark attacks data table
+* Visually display the buffer so that the user can see where the data stops for their specified point
 
 ## Conclusions
 

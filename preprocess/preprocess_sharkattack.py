@@ -91,7 +91,7 @@ def insert_data(gdf: geopandas.GeoDataFrame, table: str, chunksize: int=100) -> 
 # #run the geocoding to the dataframe
 # df = geocode(df)
 
-#Uncomment this if it is the 1s time running the file!
+#Uncomment this if it is the 1st time running the file!
 # #get the geocoded dataframe and store it as csv
 # #this path was made in order to store the geocoded file and avoid running the geocoding everytime
 # write_csv(df, shark_attacks_geo) 
