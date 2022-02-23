@@ -49,7 +49,7 @@ def get_bottom_type(x,y,connection):
 
    #Converting to geojson
    bottom_feature_collection = json.dumps(feature_collection_dict_bottom_type)
-   print(bottom_feature_collection)
+   print("bottom_feature_collection created")
 
    return  bottom_feature_collection
 
@@ -78,7 +78,7 @@ def get_shark_attacks(x,y,connection):
       'properties', to_jsonb(inputs) - 'id' - 'geometry'
    ) AS feature
    FROM (SELECT 
-      s."Date", s."Time", s."Location", s."Location_attack", s."Location_attack2", s.full_location, s."Location_attack3", s."Activity", s."Shark", s.geometry, s.id
+      s."Date", s."Location_attack3" as "Distance from the shore", s.full_location as "Location", s."Shark" as "Shark description", s."Location_attack2" as "Beach", s."Activity", s.geometry, s.id
       FROM shark_attacks as s
       WHERE st_intersects(s.geometry, 
                   st_transform(
@@ -99,7 +99,7 @@ def get_shark_attacks(x,y,connection):
 
    #Converting to geojson
    shark_feature_collection = json.dumps(feature_collection_dict_shark_attacks)
-   print(shark_feature_collection)
+   print("shark_feature_collection created")
 
    return  shark_feature_collection
 
@@ -147,7 +147,7 @@ def get_coral_reefs(x,y,connection):
 
    #Converting to geojson
    coral_feature_collection = json.dumps(feature_collection_dict_coral_reefs)
-   print(coral_feature_collection)
+   print("coral_feature_collection created")
 
    return  coral_feature_collection
 
@@ -195,7 +195,7 @@ def get_hazard_areas(x,y,connection):
 
    #Converting to geojson
    hazard_feature_collection = json.dumps(feature_collection_dict_hazard_areas)
-   print(hazard_feature_collection)
+   print("hazard_feature_collection created")
 
    return  hazard_feature_collection
 

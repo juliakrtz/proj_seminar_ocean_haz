@@ -1,78 +1,88 @@
 <!DOCTYPE html>
 <html>
-  <head>
-      <meta charset="utf-8">
 
-      <title>NOVA IMS - Group Project Seminar Proposal</title>
+<head>
+    <meta charset="utf-8">
 
-      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-      crossorigin=""/>
+    <title>NOVA IMS - Group Project Seminar Proposal</title>
 
-      <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-      crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
 
 
-      <style>
+    <style>
         #top {
-			width: 100%;
-			height: 30px;
-			float:top;
+            width: 100%;
+            height: 30px;
+            float: top;
             font: 20px Arial, Helvetica, sans-serif;
             color: #524f4f;
-		}
+        }
+
         #desc {
-			width: 100%;
-			height: 22px;
-			float:top;
+            width: 100%;
+            height: 22px;
+            float: top;
             font: 13px Arial, Helvetica, sans-serif;
             color: #7a7474;
-		}
+        }
+
         #map {
-			width: 55%;
-			height: 550px;
-			float:left;
-		}
+            width: 55%;
+            height: 550px;
+            float: left;
+        }
+
         #info {
-			width: 45%;
-			height: 550px;
-			float:left;
+            width: 45%;
+            height: 550px;
+            float: left;
             position: relative;
-		}        
+        }
+
         #form {
-			width: 45%;
-			height: 60px;
-			/* float:right; */
+            width: 45%;
+            height: 60px;
+            /* float:right; */
             font: 15px Arial, Helvetica, sans-serif;
             color: #524f4f;
             margin-top: 20px;
             margin-left: 20px;
-            margin-bottom: 10px;
-            position: relative;
-		    }
-        #weather {
-            width: 100%;
-			height: 60px;
+            margin-bottom: 5px;
             position: relative;
         }
+
+        #weather {
+            width: 100%;
+            height: 60px;
+            position: relative;
+        }
+
         #desc2 {
-			width: 100%;
-			height: 22px;
-            margin: 20px;
-			float:top;
+            width: 100%;
+            height: 22px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            float: top;
             font: 13px Arial, Helvetica, sans-serif;
             color: #7a7474;
             position: relative;
-		}
+        }
+
         .legend {
             padding: 10px 10px;
-            background-color: rgba(255,255,255,0.8);
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
             margin-right: 25px;
             margin-bottom: 25px;
         }
+
         .legend div {
             width: 18px;
             height: 18px;
@@ -81,60 +91,76 @@
             margin-bottom: 4px;
             opacity: 0.7;
         }
+
         div.legend.leaflet-control br {
             clear: both;
         }
+
         #table1 {
-			width: 20%;
-			height: 80px;
-			float:left;
+            width: 20%;
+            height: 80px;
+            float: left;
             position: relative;
+            margin-top: 25px;
+            margin-left: 10px;
         }
+
         #table2 {
-			width: 20%;
-			height: 50px;
-			float:left;
+            width: 100%;
+            height: 50px;
+            float: left;
             position: relative;
+            margin-left: 10px;
+            table-layout: auto;
         }
+
         #desc2 {
-			width: 100%;
-			height: 22px;
+            width: 100%;
+            height: 22px;
             margin: 20px;
-			float:left;
+            float: left;
             font: 13px Arial, Helvetica, sans-serif;
             color: #7a7474;
             position: relative;
-		}
-        th, td, {
-            font:15px 'Arial, Helvetica, sans-serif';
         }
-        table, th, td {
+
+        th,
+        td {
+            font: 15px 'Arial, Helvetica, sans-serif';
+        }
+
+        table,
+        th,
+        td {
             border: solid 1px #ddd;
             border-collapse: collapse;
             padding: 2px 3px;
             text-align: center;
             margin: 5px;
         }
-        th {
-            font-weight:bold;
-        }
 
-      </style>
-  </head>
-  <body>
+        th {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
     <div id="top">
-        <p style = "text-align:center;"><b>NOVA IMS - Group Project Seminar: Mapping Oceanic Hazards in Hawaii</b></p>
+        <p style="text-align:center;"><b>NOVA IMS - Group Project Seminar: Mapping Oceanic Hazards in Hawaii</b></p>
     </div>
 
-    <div id = "desc">
-        <p style = "text-align:center;"><b>On this page you will find some information about oceanic hazards. Click on the map to get the coordinates and then click the submit buttom to retrieve hazard data surrounding the point.</b></p>
+    <div id="desc">
+        <p style="text-align:center;"><b>On this page you will find some information about oceanic hazards. Click on the
+                map to get the coordinates and then click the submit buttom to retrieve hazard data surrounding the
+                point.</b></p>
     </div>
 
     <div id="map"></div>
 
-    <div id = "info">
-        
-        <div id = form>
+    <div id="info">
+
+        <div id=form>
             <form action="{{ url_for("gfg")}}" method="post">
                 <label for="longitude">Longitude (x):</label>
                 <input type="text" id="longitude" name="lon" placeholder="longitude">
@@ -143,64 +169,69 @@
                 <button type="submit">Submit</button>
             </form>
         </div>
-        
-        <div id = "desc2">
-            <p><b>Click on features in the map to see pop-up information. Turn features on and off in upper-right corner. *Note: ocean depth is in meters and is measured by how many meters below the surface the ocean floor is. </b></p>
+
+        <div id="desc2">
+            <p><b>Click on features in the map to see pop-up information. Turn features on and off in upper-right
+                    corner. *Note: ocean depth is in meters and is measured by how many meters below the surface the
+                    ocean floor is. </b></p>
         </div>
 
-        <div id = "desc2">
-            <p><b>Displayed in the table below is the current weather data from this location. Wave and wind direction are specified according to the degrees on the compass. Wave height is in meters, wind speed is in meters per second. </b></p>
+        <div id="desc2">
+            <p><b>Displayed in the table below is the current weather data from this location. Wave and wind direction
+                    are specified according to the degrees on the compass. Wave height is in meters, wind speed is in
+                    meters per second. </b></p>
         </div>
 
         <div id="weather">
             <div id='table1'></div>
-            <div style = 'float:left'>
-                <img src="https://www.netclipart.com/pp/m/70-702784_compass-rose-images-16-point-compass-rose-with.png" alt="Compass image" width="300px" style="margin-left:35%;margin-top:5%">
+            <div style='float:left'>
+                <img src="https://www.netclipart.com/pp/m/70-702784_compass-rose-images-16-point-compass-rose-with.png"
+                    alt="Compass image" width="300px" style="margin-left:35%;margin-top:5%">
             </div>
         </div>
 
-        <div id = "desc2">
+        <div id="desc2">
             <p><b>Past shark attacks in the region:</b></p>
         </div>
 
         <div id='table2'></div>
-        
+
     </div>
 
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
 
     <script type="text/javascript">
-    
-    //Map
+
+        //Map
         //styles bottom type
         var geojsonMarkerOptions = {
-        radius: 8,
-        fillColor: "#7FFFD4",
-        color: "#7FFFD4",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8
+            radius: 8,
+            fillColor: "#7FFFD4",
+            color: "#7FFFD4",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
         };
-        
+
         //styles shark attacks 
         var geojsonMarkerOptions_shark = {
-        radius: 8,
-        fillColor: "#008080",
-        color: "#008080",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.4
+            radius: 8,
+            fillColor: "#008080",
+            color: "#008080",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.4
         };
 
         //create the leaflet.js map, centered (x,y) values that comes from flask
         var map = L.map('map').setView([{{y|safe}}, {{x|safe}}], 11);
 
         //create the variables of the geojson that come from flask
-        var bottom_type =  {{bottom_type|safe}};
-        var shark_attacks =  {{shark_attacks|safe}};
-        var coral_reefs =  {{coral_reefs|safe}};
-        var hazard_areas =  {{hazard_areas|safe}};
-        
+        var bottom_type = {{bottom_type|safe}};
+        var shark_attacks = {{shark_attacks|safe}};
+        var coral_reefs = {{coral_reefs|safe}};
+        var hazard_areas = {{hazard_areas|safe}};
+
         var basemap = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
@@ -211,82 +242,82 @@
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, geojsonMarkerOptions); //style of the feature, in this case a point. geojsonMarkerOptions further style is referenced above
             },
-            onEachFeature: function (feature, layer){ //creating the popup on each feature
-                layer.bindPopup('<p><b> Bottom type: '+ feature.properties.seabed) //string and following column which is displayed in the popup
+            onEachFeature: function (feature, layer) { //creating the popup on each feature
+                layer.bindPopup('<p><b> Bottom type: ' + feature.properties.seabed) //string and following column which is displayed in the popup
             }
         }).addTo(map); //add the layer to the map
 
-        var coral_layer = L.geoJSON(coral_reefs,{
+        var coral_layer = L.geoJSON(coral_reefs, {
             onEachFeature: function (feature, layer) {
-                layer.bindPopup('<p><b> Area in acres: '+ feature.properties.acres +  '</b></p>') //this ending is different because the column contains integers we want displayed in the popup
+                layer.bindPopup('<p><b> Area in acres: ' + feature.properties.acres + '</b></p>') //this ending is different because the column contains integers we want displayed in the popup
             },
             style: { //this feature is not a circle marker/point, so we include the style here 
-                    color: "orange",
-                    weight: 2,
-                    fillColor: "orange",
-                    fillOpacity: 0.4
-                }
+                color: "orange",
+                weight: 2,
+                fillColor: "orange",
+                fillOpacity: 0.4
+            }
         }).addTo(map);
 
-        var hazard_layer = L.geoJSON(hazard_areas,{
+        var hazard_layer = L.geoJSON(hazard_areas, {
             onEachFeature: function (feature, layer) {
-                layer.bindPopup('<p><b> Depth in meters: '+ feature.properties.gridcode + '</b></p>')
+                layer.bindPopup('<p><b> Depth in meters: ' + feature.properties.gridcode + '</b></p>')
             },
             style: {
-                    color: "red",
-                    weight: 2, 
-                    fillColor: "red",
-                    fillOpacity: 0.4
-                }
+                color: "red",
+                weight: 2,
+                fillColor: "red",
+                fillOpacity: 0.4
+            }
         }).addTo(map);
 
         var shark_layer = L.geoJSON(shark_attacks, {
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, geojsonMarkerOptions_shark);
             },
-            onEachFeature: function (feature, layer){
+            onEachFeature: function (feature, layer) {
                 layer.bindPopup('<p><b> Attack date:' + feature.properties.Date + '</b></p>' + '<p><b> Attack location:' + feature.properties.Location_attack + feature.properties.Location_attack2, feature.properties.full_location, '<p><b> Shark type:' + feature.properties.Shark)
             }
         }).addTo(map);
 
         //adding layers control panel to switch on and off layers, did this according to Leaflet documentation with Geojson 
 
-        var baselayers = {"Basemap": basemap};  
+        var baselayers = { "Basemap": basemap };
         var overlays = {
-            "Bottom Type" : bottom_layer,
-            "Coral Reefs" : coral_layer,
+            "Bottom Type": bottom_layer,
+            "Coral Reefs": coral_layer,
             "Ocean Depth": hazard_layer,
             "Shark Attacks": shark_layer
         };
-    
-        L.control.layers(baselayers, overlays, {collapsed: false}).addTo(map)
+
+        L.control.layers(baselayers, overlays, { collapsed: false }).addTo(map)
 
         //adding a legend to the map, again according to Leaflet documentation (specifically L.Control functions)
-        var legend = L.control({position: 'bottomright'});
-        legend.onAdd = function(){
+        var legend = L.control({ position: 'bottomright' });
+        legend.onAdd = function () {
             var div = L.DomUtil.create('div', 'legend');
-            div.innerHTML = 
-            '<div style="background-color: #7FFFD4"></div>Bottom Type<br>' +
-            '<div style="background-color: orange"></div>Coral Reefs<br>' +
-            '<div style="background-color: red"></div>Ocean Depth<br>';
+            div.innerHTML =
+                '<div style="background-color: #7FFFD4"></div>Bottom Type<br>' +
+                '<div style="background-color: orange"></div>Coral Reefs<br>' +
+                '<div style="background-color: red"></div>Ocean Depth<br>';
             return div;
         };
         legend.addTo(map);
 
         //pass coordinates to the form when click on the map
-        map.on('click', function(e) {
-        var lat = e.latlng.lat;
-        var lon = e.latlng.lng;
-        document.getElementById('longitude').value = lon;
-        document.getElementById('latitude').value = lat;
+        map.on('click', function (e) {
+            var lat = e.latlng.lat;
+            var lon = e.latlng.lng;
+            document.getElementById('longitude').value = lon;
+            document.getElementById('latitude').value = lat;
         });
-        
-    //create variable for the table of weather data
+
+        //create variable for the table of weather data
         var table_weather = document.createElement("table");
 
         // add json data to the table as rows.
         for (const [key, value] of Object.entries({{weather_json|safe}})) {
-            if (key !== "time"){
+            if (key !== "time") {
                 var th = document.createElement("th");      // table header.
                 th.innerHTML = key;
 
@@ -294,21 +325,21 @@
                 var tr = table_weather.insertRow(-1);                   // table row.
                 tr.appendChild(th);
                 var tabCell = tr.insertCell(-1);
-                tabCell.innerHTML =  Object.values(value);
-            }          
-        }   
+                tabCell.innerHTML = Object.values(value);
+            }
+        }
 
         // Now, add the newly created table with json data, to a container.
         var divShowData = document.getElementById('table1');
         divShowData.innerHTML = "";
         divShowData.appendChild(table_weather);
-    
-    //Table of Shark Attacks
+
+        //Table of Shark Attacks
         var col = [];
         sharks_data = {{shark_attacks|safe}};
 
-        for (const properties of sharks_data.features){
-            for (const key of Object.keys(properties.properties)){
+        for (const properties of sharks_data.features) {
+            for (const key of Object.keys(properties.properties)) {
                 if (col.indexOf(key) === -1) {
                     col.push(key);
                 }
@@ -323,26 +354,26 @@
             th_shark.innerHTML = col[i];
             tr_sharks.appendChild(th_shark);
         };
-        console.log(col);           
-        
+
         // ADD JSON DATA TO THE TABLE AS ROWS.
-        for (const properties of sharks_data.features){
-            for (const [key,value] of Object.entries(properties.properties)){
-                // console.log(col)
+        
+        for (const properties of sharks_data.features) {
+            for (const [key, value] of Object.entries(properties.properties)) {
                 tr_sharks = table_sharks.insertRow(-1);
-                
-                 for (var j = 0; j < col.length; j++) {
-                     var tabCell = tr_sharks.insertCell(-1);
-                     tabCell.innerHTML = properties.properties[col[j]];
-                 }
+                console.log(col)
+                for (var j = 0; j < col.length; j++) {
+                    var tabCell = tr_sharks.insertCell(-1);
+                    tabCell.innerHTML = properties.properties[col[j]];
+                }
             }
         };
+
         // Now, add the newly created table with json data, to a container.
         var divShowData2 = document.getElementById('table2');
         divShowData2.innerHTML = "";
         divShowData2.appendChild(table_sharks);
     </script>
 
-  </body>
+</body>
 
 </html>
